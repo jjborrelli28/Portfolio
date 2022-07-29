@@ -1,0 +1,23 @@
+{
+  "extends": "tsconfig/nextjs.json",
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~next-contentful/*": [
+        "../../packages/next-contentful/*"
+      ],
+      "@emotion/core": [
+        "node_modules/@emotion/react"
+      ]
+    },
+    "incremental": true
+  }
+}
