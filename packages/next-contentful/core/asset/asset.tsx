@@ -4,10 +4,17 @@ import { ImageProps as NextImageProps } from "next/image";
 import { styled } from "~next-contentful/config";
 import { forwardRef } from "react";
 import clsx from "clsx";
+import type * as Stitches from "@stitches/react";
 
 export const Asset = forwardRef(
   (
-    { asset, className = "", assetClassName = "", ...restProps }: AssetProps,
+    {
+      asset,
+      css,
+      className = "",
+      assetClassName = "",
+      ...restProps
+    }: AssetProps,
     ref
   ) => {
     if (!asset) {
@@ -20,13 +27,22 @@ export const Asset = forwardRef(
       const layout = restProps.layout;
 
       return (
-        <AssetContainer ref={ref} className={clsx({ [className]: className })}>
-          <ImageContainer css={{ h: layout === "fill" ? "100%" : "auto" }}>
+        <AssetContainer
+          {...{
+            ref,
+            css,
+            className: clsx({
+              [className]: className,
+            }),
+          }}
+        >
+          <ImageContainer css={{ h: layout === "fill" ? "$full" : "auto" }}>
             <Image
               props={asset}
               className={clsx({
                 [assetClassName]: assetClassName,
               })}
+              placeholder="blur"
               {...restProps}
             />
           </ImageContainer>
@@ -38,12 +54,6 @@ export const Asset = forwardRef(
   }
 );
 
-const ImageContainer = styled("div", {
-  position: "relative",
-  display: "block",
-  w: "100%",
-});
-
 const AssetContainer = styled("div", {
   position: "relative",
   display: "flex",
@@ -51,13 +61,20 @@ const AssetContainer = styled("div", {
   justifyContent: "center",
   alignItems: "center",
   m: "auto",
-  h: "100%",
-  w: "100%",
+  h: "$full",
+  w: "$full",
   zIndex: "10",
+});
+
+const ImageContainer = styled("div", {
+  position: "relative",
+  display: "block",
+  w: "$full",
 });
 
 export type AssetProps = {
   asset: ImageProps;
+  css?: Stitches.CSS;
   className?: string;
   assetClassName?: string;
 } & Omit<NextImageProps, "src">;

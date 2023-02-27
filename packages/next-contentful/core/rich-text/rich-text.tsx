@@ -13,10 +13,12 @@ import {
   createDefaultInlineRenderers,
 } from "./rich-text-utils";
 import { RichTextContainer } from "./rich-text-container";
+import type * as Stitches from "@stitches/react";
+import clsx from "clsx";
 
 export interface RichTextProps {
   content?: Document;
-  style?: React.CSSProperties;
+  css?: Stitches.CSS;
   className?: string;
   renderers?: Renderers;
   blockClass?: BlockClass;
@@ -26,8 +28,8 @@ export interface RichTextProps {
 
 export const RichText = ({
   content,
-  style,
-  className,
+  css,
+  className = "",
   renderers = {},
   blockClass = {},
   inlineClass = {},
@@ -51,7 +53,7 @@ export const RichText = ({
   );
 
   return (
-    <RichTextContainer style={style} className={className}>
+    <RichTextContainer css={css} className={clsx({ [className]: className })}>
       {documentToReactComponents(content, {
         renderNode: {
           ...defaultBlockRenderers,

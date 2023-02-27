@@ -106,10 +106,8 @@ export const createDefaultBlockRenderers = (blockClass: BlockClass) => ({
     if (embeddedEntryName === "typeWriter") {
       const { content, customStyles } = _node.data.target.fields;
 
-      const texts = [...content];
-
       const { text } = useTypewriter({
-        words: texts,
+        words: [...content],
         typeSpeed: 125,
         deleteSpeed: 100,
         loop: 0,

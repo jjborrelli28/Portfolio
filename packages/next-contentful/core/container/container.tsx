@@ -20,11 +20,11 @@ export const Container = styled("div", {
       xl: {
         maxw: "1400px",
       },
-      n: {
+      full: {
         maxw: "none",
       },
     },
   },
 });
 
-export type ContainerProps = "xs" | "sm" | "md" | "lg" | "xl" | "n";
+export type ContainerProps = "xs" | "sm" | "md" | "lg" | "xl" | "full";

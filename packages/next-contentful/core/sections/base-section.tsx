@@ -1,27 +1,39 @@
 // @ts-nocheck
 import { Container, ContainerProps } from "~next-contentful/core";
-import { styled } from "~next-contentful/config";
-import { forwardRef, ReactNode } from "react";
+import { css as cssProps, styled } from "~next-contentful/config";
+import { forwardRef, PropsWithChildren } from "react";
+import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
 
 export const BaseSection = forwardRef(
   (
-    { children, size, backgroundColor, className = "", id }: BaseSectionProps,
+    {
+      children,
+      id,
+      size,
+      backgroundColor,
+      css,
+      className = "",
+    }: PropsWithChildren<BaseSectionProps>,
     ref
   ) => {
-    return (
-      <Section {...{ backgroundColor, id, ref }}>
-        <Container
-          size={size}
-          css={{
-            py: "2rem",
-            px: size === "n" ? "0" : "2rem",
+    const containerStyles = cssProps({
+      py: "$8",
+      px: size === "full" ? "$0" : "$8",
 
-            "@bp2": {
-              py: "6rem",
-            },
+      "@bp2": {
+        py: "$17",
+      },
+    }).toString();
+
+    return (
+      <Section {...{ id, ref, backgroundColor }}>
+        <Container
+          {...{
+            size,
+            css,
+            className: clsx(containerStyles, { [className]: className }),
           }}
-          className={clsx({ [className]: className })}
         >
           {children}
         </Container>
@@ -44,11 +56,11 @@ const Section = styled("section", {
 });
 
 type BaseSectionProps = {
-  children: ReactNode;
+  id?: string;
   size?: ContainerProps;
   backgroundColor: BackgroundColorBaseSectionProps;
+  css?: Stitches.CSS;
   className?: string;
-  id?: string;
 };
 
 export type BackgroundColorBaseSectionProps = "primary" | "secondary";
