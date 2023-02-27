@@ -25,10 +25,8 @@ export const CardLink = ({
   ariaLabel,
 }: CardLinkProps) => {
   return (
-    <Link href={href}>
-      <a target={target} aria-label={ariaLabel}>
-        {children}
-      </a>
+    <Link href={href} target={target} aria-label={ariaLabel}>
+      {children}
     </Link>
   );
 };

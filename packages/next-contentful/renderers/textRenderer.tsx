@@ -1,4 +1,4 @@
-import { underlineSecondaryAnimation } from "~next-contentful/animations";
+import { secondaryUnderlineAnimation } from "~next-contentful/animations";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { useInView } from "react-intersection-observer";
@@ -72,7 +72,7 @@ export const textRenderer = (text?: TextProps, className = "") => {
             [tag]: { display: "inline !important", m: "0" },
           }).toString(),
           {
-            [underlineSecondaryAnimation({ tag, time: 500, active: inView })]:
+            [secondaryUnderlineAnimation({ tag, time: 500, active: inView })]:
               underline,
             [className]: className,
             [styles]: styles,

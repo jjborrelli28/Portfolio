@@ -1,6 +1,6 @@
 import { css } from "~next-contentful/config";
 
-export const underlinePrimaryAnimation = css({
+export const primaryUnderlineAnimation = css({
   position: "relative",
 
   "&::after": {
@@ -27,42 +27,36 @@ export const underlinePrimaryAnimation = css({
   },
 }).toString();
 
-export const underlineSecondaryAnimation = ({
-  tag,
+export const secondaryUnderlineAnimation = ({
   time,
   active,
-}: UnderlineSecondaryAnimationProps) => {
+}: secondaryUnderlineAnimationProps) => {
   return css({
-    [tag]: {
-      position: "relative",
-      display: "inline-block",
+    position: "relative",
+    display: "inline-block",
 
-      "&::before": {
-        left: "0",
-        right: "0",
-        bottom: "0",
-        content: '""',
-        position: "absolute",
-        transform: "scaleX(0)",
-        transition: `transform ${time}ms cubic-bezier(0.0, 0, 0.2, 1) 0s`,
-        transitionDelay: "0.5s",
-        transformOrigin: "bottom left",
-        pointerEvents: "none",
-      },
+    "&::before": {
+      left: "0",
+      right: "0",
+      bottom: "0",
+      content: '""',
+      position: "absolute",
+      transform: "scaleX(0)",
+      transition: `transform ${time}ms cubic-bezier(0.0, 0, 0.2, 1) 0s`,
+      transitionDelay: "0.5s",
+      transformOrigin: "bottom left",
+      pointerEvents: "none",
+    },
 
-      "&:before": {
-        bottom: "-0.6rem",
-        bb: "0.3rem solid $line",
-        transform: active ? "scaleX(1) !important" : "",
-      },
+    "&:before": {
+      bottom: "-0.2rem",
+      bb: "0.3rem solid $line",
+      transform: active ? "scaleX(1) !important" : "",
     },
   }).toString();
 };
 
-type HeadingTagsProps = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-
-type UnderlineSecondaryAnimationProps = {
-  tag: HeadingTagsProps;
+type secondaryUnderlineAnimationProps = {
   time: number;
   active: boolean;
 };

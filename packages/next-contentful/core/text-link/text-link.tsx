@@ -8,10 +8,8 @@ export const TextLink = ({
   ariaLabel,
 }: TextLinkProps) => {
   return (
-    <Link href={href}>
-      <a target={target} aria-label={ariaLabel} data-href={href}>
-        {children}
-      </a>
+    <Link href={href} target={target} aria-label={ariaLabel} data-href={href}>
+      {children}
     </Link>
   );
 };

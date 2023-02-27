@@ -73,14 +73,9 @@ export const GridCard = ({ props }: GridCardProps) => {
           >
             {links.map((link, index) => {
               return (
-                <TextLink
-                  key={index}
-                  href={link.fields.url}
-                  target="_blank"
-                  ariaLabel={`${asset.fields.title}'s ${link.fields.reference}`}
-                >
+          
                   <Icon type={link.fields.reference} />
-                </TextLink>
+   
               );
             })}
           </LinksContainer>

@@ -2,8 +2,9 @@ import { Icon, TextLink } from "~next-contentful/core";
 import { styled } from "~next-contentful/config";
 import {
   fadeAnimation,
-  underlinePrimaryAnimation,
+  primaryUnderlineAnimation,
 } from "~next-contentful/animations";
+import { Fragment } from "react";
 
 export const NavigationItem = ({ item }: NavigationItemProps) => {
   const { text, url, reference } = item.fields;
@@ -16,10 +17,12 @@ export const NavigationItem = ({ item }: NavigationItemProps) => {
         mode: "mobile",
       })}
     >
-      <ItemContainer className={underlinePrimaryAnimation}>
+      <ItemContainer className={primaryUnderlineAnimation}>
         <TextLink href={url} ariaLabel={text}>
-          <Icon type={reference} />
-          &nbsp;{text}
+          <Fragment>
+            <Icon type={reference} />
+            &nbsp;{text}
+          </Fragment>
         </TextLink>
       </ItemContainer>
     </ItemList>
