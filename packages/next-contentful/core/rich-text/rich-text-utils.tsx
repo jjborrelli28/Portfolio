@@ -30,17 +30,17 @@ const parseContents = (contents: any) => {
     return content.props.children;
   });
 
-  const { ref, inView } = useInView({
+  const { ref: underlineView, inView: underlineInView } = useInView({
     initialInView: false,
   });
 
   return (
     <Underline
-      ref={ref}
+      ref={underlineView}
       className={clsx(
         secondaryUnderlineAnimation({
           time: 500,
-          active: inView,
+          active: underlineInView,
         })
       )}
     >
@@ -80,11 +80,15 @@ export const createDefaultBlockRenderers = (blockClass: BlockClass) => ({
       {parseContents(children)}
     </Heading6>
   ),
-  [BLOCKS.PARAGRAPH]: (_node: any, children: any) => (
-    <Paragraph className={blockClass[BLOCKS.PARAGRAPH]}>
-      {parseContents(children)}
-    </Paragraph>
-  ),
+  [BLOCKS.PARAGRAPH]: (_node: any, children: any) => {
+    if (children[0] === "") return null;
+
+    return (
+      <Paragraph className={blockClass[BLOCKS.PARAGRAPH]}>
+        {parseContents(children)}
+      </Paragraph>
+    );
+  },
   [BLOCKS.OL_LIST]: (_node: any, children: any) => (
     <ol className={blockClass[BLOCKS.OL_LIST]}>{parseContents(children)}</ol>
   ),
@@ -146,17 +150,17 @@ export const buildRenderMarks = (
     <i className={markClass[MARKS.ITALIC]}>{text}</i>
   ),
   [MARKS.UNDERLINE]: (text: ReactNode) => {
-    const { ref, inView } = useInView({
+    const { ref: underlineRef, inView: underlineInView } = useInView({
       initialInView: false,
     });
 
     return (
       <Underline
-        ref={ref}
+        ref={underlineRef}
         className={clsx(
           secondaryUnderlineAnimation({
             time: 500,
-            active: inView,
+            active: underlineInView,
           }),
           markClass[MARKS.UNDERLINE]
         )}

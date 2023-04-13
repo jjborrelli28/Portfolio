@@ -4,13 +4,15 @@ import {
   BaseSection,
   ContainerProps,
   ImageProps,
-  TextContainer,
 } from "~next-contentful/core";
-import { TextProps, textRenderer } from "~next-contentful/renderers";
+import { TextProps } from "~next-contentful/renderers";
 import { fadeAnimation } from "~next-contentful/animations";
 import { useInView } from "react-intersection-observer";
 import { css, styled } from "~next-contentful/config";
 import clsx from "clsx";
+import { RichText } from "~next-contentful/core/rich-text/rich-text";
+import { Document } from "@contentful/rich-text-types";
+import type * as Stitches from "@stitches/react";
 
 export const Spotlight = ({ section }: SpotlightProps) => {
   const {
@@ -19,9 +21,8 @@ export const Spotlight = ({ section }: SpotlightProps) => {
     backgroundColor,
     isSection,
     reverse,
-    headline,
-    subheadline,
-    body,
+    content,
+    customContentStyles,
     asset,
   } = section.fields;
 
@@ -34,25 +35,16 @@ export const Spotlight = ({ section }: SpotlightProps) => {
 
   return (
     <Container {...{ size, backgroundColor }} id={sectionName}>
-      {headline && (
-        <TextContainer
-          css={{
-            color: "$fontSecondary",
-            mb: "2rem",
-
-            "@bp2": {
-              mb: "4rem",
-            },
-          }}
-        >
-          {textRenderer(headline)}
-        </TextContainer>
-      )}
       <SpotlightPrimaryContainer mode={reverse ? "reverse" : "normal"}>
-        <TextContainer className={clsx({ [textContainerStyles]: reverse })}>
-          {textRenderer(subheadline)}
-          {textRenderer(body, bodyStyles)}
-        </TextContainer>
+        <RichText
+          {...{
+            content,
+            css: customContentStyles,
+            className: clsx(
+              reverse ? reverseContentContainerStyles : contentContainerStyles
+            ),
+          }}
+        />
         <Asset
           ref={ref}
           asset={asset}
@@ -76,10 +68,11 @@ export const Spotlight = ({ section }: SpotlightProps) => {
 };
 
 const SpotlightContainer = styled("div", {
-  py: "2rem",
+  pb: "4rem",
 
   "@bp2": {
-    py: "4rem",
+    pt: "4rem",
+    pb: "8rem",
   },
 
   variants: {
@@ -127,21 +120,18 @@ export const SpotlightPrimaryContainer = styled("div", {
   },
 });
 
-const textContainerStyles = css({
+const contentContainerStyles = css({
+  pr: "14rem",
+})();
+
+const reverseContentContainerStyles = css({
   gridArea: "text",
+  pl: "14rem",
 })();
 
 const assetStyles = css({
   gridArea: "asset",
   maxw: "500px",
-})();
-
-const bodyStyles = css({
-  mt: "1rem",
-
-  "@bp2": {
-    mt: "2rem",
-  },
 })();
 
 export type SpotlightProps = {
@@ -155,9 +145,8 @@ export type SportlightFieldsProps = {
     backgroundColor: BackgroundColorBaseSectionProps;
     isSection: boolean;
     reverse: boolean;
-    headline: TextProps;
-    subheadline: TextProps;
-    body: TextProps;
+    content: Document;
+    customContentStyles: Stitches.CSS;
     asset: ImageProps;
   };
 };

@@ -27,7 +27,7 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
     arrowDownLink,
   } = section.fields;
 
-  const { ref, inView } = useInView({
+  const { ref: refAsset, inView: assetInView } = useInView({
     initialInView: true,
   });
 
@@ -61,12 +61,12 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
       />
       <Asset
         {...{
-          ref,
+          ref: refAsset,
           asset,
           css: { maxw: "500px" },
           assetClassName: clsx(
             fadeAnimation({
-              type: inView ? "inRight" : "out",
+              type: assetInView ? "inRight" : "out",
               time: 1000,
             })
           ),
@@ -80,7 +80,7 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
           <Icon
             type="arrow-down"
             className={clsx(
-              arrowStyles(inView),
+              arrowStyles(assetInView),
               bounceAnimation({ time: 2000 })
             )}
           />
