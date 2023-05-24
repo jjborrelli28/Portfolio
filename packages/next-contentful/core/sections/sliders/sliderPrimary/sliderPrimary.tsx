@@ -5,52 +5,61 @@ import {
   ContainerProps,
   ImageProps,
   Pictures,
-  TextContainer,
+  RichText,
 } from "~next-contentful/core";
-import { TextProps, textRenderer } from "~next-contentful/renderers";
-import { fadeAnimation } from "~next-contentful/animations";
-import { css, styled } from "~next-contentful/config";
+import { styled } from "~next-contentful/config";
 import { useInView } from "react-intersection-observer";
+import { fadeAnimation } from "~next-contentful/animations";
+import { Document } from "@contentful/rich-text-types";
+import type * as Stitches from "@stitches/react";
 
 export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
-  const { sectionName, size, backgroundColor, headline, pictures } =
-    section.fields;
+  const {
+    sectionName,
+    size,
+    backgroundColor,
+    headline,
+    customHeadlineStyles,
+    pictures,
+  } = section.fields;
 
-  const { ref, inView } = useInView({
-    initialInView: true,
-    rootMargin: "-100px",
-  });
+  const { ref: headlineRef, inView: headlineInView } = useInView();
 
   return (
-    <BaseSection {...{ size: "n", backgroundColor, ref }} id={sectionName}>
+    <BaseSection id={sectionName} size="full" backgroundColor={backgroundColor}>
       <Container size={size} css={{ px: "2rem" }}>
-        {headline && (
-          <TextContainer
-            className={fadeAnimation({
-              type: inView ? "inLeft" : "out",
-              time: 1000,
-            })}
-          >
-            {textRenderer(headline, headlineStyles)}
-          </TextContainer>
-        )}
+        <RichText
+          ref={headlineRef}
+          content={headline}
+          css={
+            customHeadlineStyles || {
+              color: "$fontSecondary",
+              h2: {
+                mb: "3rem",
+              },
+            }
+          }
+          className={fadeAnimation({
+            type: headlineInView ? "inLeft" : "out",
+            time: 1000,
+          })}
+        />
       </Container>
       <SliderContainer>
-        <Pictures {...{ pictures, sliderType: "primary", inView }} />
-        <Pictures {...{ pictures, sliderType: "secondary", inView }} />
+        <Pictures
+          pictures={pictures}
+          sliderType="primary"
+          inView={headlineInView}
+        />
+        <Pictures
+          pictures={pictures}
+          sliderType="secondary"
+          inView={headlineInView}
+        />
       </SliderContainer>
     </BaseSection>
   );
 };
-
-const headlineStyles = css({
-  color: "$fontSecondary",
-  mb: "2rem",
-
-  "@bp2": {
-    mb: "6rem",
-  },
-})();
 
 const SliderContainer = styled("div", {
   position: "relative",
@@ -74,9 +83,8 @@ type SliderPrimaryFieldsProps = {
     sectionName: string;
     size: ContainerProps;
     backgroundColor: BackgroundColorBaseSectionProps;
-    headline: TextProps;
-    subheadline: TextProps;
-    body: TextProps;
+    headline: Document;
+    customHeadlineStyles: Stitches.CSS;
     pictures: ImageProps[];
   };
 };

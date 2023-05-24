@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 const initialState: InitialStateProps = {
   status: "closed",
@@ -9,7 +9,7 @@ const HeaderContext = createContext(initialState);
 
 export const useHeaderContext = () => useContext(HeaderContext);
 
-export const HeaderController = ({ children }: HeaderControllerProps) => {
+export const HeaderController = ({ children }: PropsWithChildren) => {
   const [status, setStatus] = useState(initialState);
 
   return (
@@ -22,8 +22,4 @@ export const HeaderController = ({ children }: HeaderControllerProps) => {
 export type InitialStateProps = {
   status: "opened" | "closed";
   setStatus?: any;
-};
-
-type HeaderControllerProps = {
-  children: ReactNode;
 };

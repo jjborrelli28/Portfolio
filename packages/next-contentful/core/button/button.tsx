@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 import { styled } from "~next-contentful/config";
 import { SpinnerPrimary } from "~next-contentful/core";
 
@@ -10,7 +10,7 @@ export const Button = ({
   onClick,
   onSubmit,
   disabled,
-}: ButtonProps) => {
+}: PropsWithChildren<ButtonProps>) => {
   return (
     <BaseButton
       {...{ type, size, onClick, onSubmit }}
@@ -104,7 +104,6 @@ export const BaseButton = styled("button", {
 });
 
 type ButtonProps = {
-  children: ReactNode;
   type: "button" | "submit" | "reset";
   size?: "sm" | "md" | "lg";
   loading?: boolean;

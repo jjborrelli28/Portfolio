@@ -1,9 +1,9 @@
 import { Asset, ImageProps } from "~next-contentful/core";
+import { css, styled } from "~next-contentful/config";
 import {
   fadeAnimation,
   slidePrimaryAnimation,
 } from "~next-contentful/animations";
-import { css, styled } from "~next-contentful/config";
 
 export const Pictures = ({
   pictures,
@@ -29,15 +29,15 @@ export const Pictures = ({
             <Asset
               key={index}
               asset={picture}
+              layout="responsive"
+              placeholder="blur"
+              sizes="33vw"
+              loading="lazy"
               assetClassName={picturesStyles}
               className={fadeAnimation({
                 type: inView ? "in" : "out",
                 time: 1000,
               })}
-              layout="responsive"
-              placeholder="blur"
-              sizes="33vw"
-              loading="lazy"
             />
           );
         })}

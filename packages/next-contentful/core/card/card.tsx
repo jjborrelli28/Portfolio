@@ -1,10 +1,25 @@
-import { Image, ImageProps, TextContainer } from "~next-contentful/core";
+import { Image, ImageProps } from "~next-contentful/core";
 import { css, styled } from "~next-contentful/config";
 import { ReactNode } from "react";
 import Link from "next/link";
+import { PropsWithChildren } from "react";
+import { RichText, RichTextProps } from "../rich-text/rich-text";
+import type * as Stitches from "@stitches/react";
+import { Document } from "@contentful/rich-text-types";
+import { Paragraph } from "../rich-text/html-components";
+import { Icon } from "../icons/icon";
+import { Asset } from "../asset/asset";
 
-export const Card = ({ children, css, className }: CardProps) => {
-  return <CardContainer {...{ css, className }}>{children}</CardContainer>;
+export const Card = ({
+  children,
+  css,
+  className,
+}: PropsWithChildren<CardProps>) => {
+  return (
+    <CardContainer css={css} className={className}>
+      {children}
+    </CardContainer>
+  );
 };
 
 const CardContainer = styled("div", {
@@ -13,8 +28,7 @@ const CardContainer = styled("div", {
 });
 
 type CardProps = {
-  children: ReactNode;
-  css?: any;
+  css?: Stitches.CSS;
   className?: string;
 };
 
@@ -23,19 +37,20 @@ export const CardLink = ({
   href,
   target = "_self",
   ariaLabel,
-}: CardLinkProps) => {
+  className,
+}: PropsWithChildren<CardLinkProps>) => {
   return (
     <Link href={href} target={target} aria-label={ariaLabel}>
-      {children}
+      <a className={className}>{children}</a>
     </Link>
   );
 };
 
 type CardLinkProps = {
-  children: ReactNode;
   href: string;
   target?: "_blank" | "_parent" | "_self" | "_top";
-  ariaLabel: string;
+  ariaLabel?: string;
+  className?: string;
 };
 
 export const CardImage = ({
@@ -99,54 +114,137 @@ type CardImageProps = {
   bottom?: boolean;
 };
 
-export const CardTextContainer = ({ children }: CardTextContainerProps) => {
+export const CardContent = ({
+  content,
+  css: customContentStyles,
+  ...restProps
+}: RichTextProps) => {
   return (
-    <TextContainer
-      css={{
-        p: "1.2rem",
-        h: "100%",
-        justifyContent: "space-between",
-        gap: "0.64rem",
+    <RichText
+      css={
+        customContentStyles || {
+          p: "1.2rem",
+          h: "100%",
+          justifyContent: "space-between",
+          gap: "0.64rem",
 
-        "@bp2": {
-          p: "1.5rem",
-          gap: "0.8rem",
+          "@bp2": {
+            p: "1.5rem",
+            gap: "0.8rem",
+          },
+        }
+      }
+      content={content}
+      renderers={{
+        paragraph: (_node, children) => {
+          const hasEmbeddedEntryInline = _node.content.some(
+            (c) => c.nodeType === "embedded-entry-inline"
+          );
+
+          if (hasEmbeddedEntryInline) {
+            const embbedEntries = _node.content.filter(
+              (c) => c.nodeType === "embedded-entry-inline"
+            );
+
+            const EmbeddedEntriesContainer = styled("div", {
+              display: "flex",
+              gap: "8px",
+
+              "@bp2": {
+                gap: "10px",
+              },
+            });
+
+            return (
+              <EmbeddedEntriesContainer>
+                {embbedEntries.map((entry, index) => {
+                  const entryType = entry.data.target.sys.contentType.sys.id;
+
+                  if (entryType === "cta")
+                    return (
+                      <Card.Link
+                        key={index}
+                        href={entry.data.target.fields.url}
+                        target="_blank"
+                        ariaLabel={entry.data.target.fields.text}
+                      >
+                        <Icon
+                          type={entry.data.target.fields.reference}
+                          className={css({
+                            color: "$fontTertiary",
+                            w: "18px",
+                            h: "18px",
+                            "@bp2": { w: "22px", h: "22px" },
+                          })()}
+                        />
+                      </Card.Link>
+                    );
+
+                  if (entryType === "image")
+                    return (
+                      <Asset
+                        key={index}
+                        asset={entry.data.target}
+                        layout="responsive"
+                        placeholder="blur"
+                        sizes="5vw"
+                        loading="lazy"
+                        className={css({
+                          m: "0",
+                          w: "20px",
+                          "@bp2": {
+                            w: "25px",
+                          },
+                        })()}
+                      />
+                    );
+                })}
+              </EmbeddedEntriesContainer>
+            );
+          }
+
+          return (
+            <Paragraph
+              className={css({
+                fontSize: "$5",
+                a: {
+                  color: "$fontTertiary",
+                  textDecoration: "none",
+                  transition: "all 0.3s",
+
+                  "&:hover": {
+                    filter: "brightness(1.15)",
+                    transform: "scale(1.05)",
+                  },
+                },
+
+                "@bp2": {
+                  fontSize: "$6",
+                },
+              })()}
+            >
+              {children}
+            </Paragraph>
+          );
         },
       }}
-    >
-      {children}
-    </TextContainer>
+      blockClass={{
+        "heading-3": css({ color: "$fontSecondary", mb: "0" })(),
+      }}
+      {...restProps}
+    />
   );
 };
 
-type CardTextContainerProps = {
-  children: ReactNode;
-};
-
-export const CardTitle = styled("div", {
-  "*": {
-    color: "$fontSecondary",
-
-    "@bp2": {
-      color: "$fontSecondary",
-    },
-  },
-});
-
-export const CardDescription = styled("div", {
-  "*": {
-    color: "$fontPrimary",
-    fontSize: "$5",
-    my: "0.5rem",
-
-    "@bp2": {
-      fontSize: "$6",
-    },
-  },
-});
-
 Card.Link = CardLink;
 Card.Image = CardImage;
-Card.TextContainer = CardTextContainer;
-Card.Title = CardTitle;
-Card.Description = CardDescription;
+Card.Content = CardContent;
+
+export type CardFieldsProps = {
+  fields: {
+    title: string;
+    asset: ImageProps;
+    content: Document;
+    customContentStyles: Stitches.CSS;
+  };
+};

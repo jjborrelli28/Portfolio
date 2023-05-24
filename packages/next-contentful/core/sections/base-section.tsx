@@ -1,9 +1,8 @@
-// @ts-nocheck
 import { Container, ContainerProps } from "~next-contentful/core";
-import { css as cssProps, styled } from "~next-contentful/config";
-import { forwardRef, PropsWithChildren } from "react";
-import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
+import { css as cssProps, styled } from "~next-contentful/config";
+import { ForwardedRef, forwardRef, PropsWithChildren } from "react";
+import type * as Stitches from "@stitches/react";
 
 export const BaseSection = forwardRef(
   (
@@ -15,7 +14,7 @@ export const BaseSection = forwardRef(
       css,
       className = "",
     }: PropsWithChildren<BaseSectionProps>,
-    ref
+    ref: ForwardedRef<any>
   ) => {
     const containerStyles = cssProps({
       py: "$8",
@@ -27,13 +26,11 @@ export const BaseSection = forwardRef(
     }).toString();
 
     return (
-      <Section {...{ id, ref, backgroundColor }}>
+      <Section id={id} ref={ref} backgroundColor={backgroundColor}>
         <Container
-          {...{
-            size,
-            css,
-            className: clsx(containerStyles, { [className]: className }),
-          }}
+          size={size}
+          css={css}
+          className={clsx(containerStyles, { [className]: className })}
         >
           {children}
         </Container>

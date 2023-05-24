@@ -1,14 +1,14 @@
 import { Container, ContainerProps } from "~next-contentful/core";
 import { useInView } from "react-intersection-observer";
 import { css, styled } from "~next-contentful/config";
-import { Fragment, ReactNode } from "react";
+import { Fragment, PropsWithChildren } from "react";
 import clsx from "clsx";
 
 export const HeaderContainer = ({
   children,
   status,
   size = "lg",
-}: BaseHeaderProps) => {
+}: PropsWithChildren<BaseHeaderProps>) => {
   const { ref, inView } = useInView({
     initialInView: true,
   });
@@ -84,7 +84,6 @@ const headerCompressed = css({
 const containerCompressed = css({ py: "1rem" })();
 
 type BaseHeaderProps = {
-  children: ReactNode;
   status: "opened" | "closed";
   size?: ContainerProps;
 };

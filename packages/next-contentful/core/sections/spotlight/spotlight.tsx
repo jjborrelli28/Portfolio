@@ -4,13 +4,12 @@ import {
   BaseSection,
   ContainerProps,
   ImageProps,
+  RichText,
 } from "~next-contentful/core";
-import { TextProps } from "~next-contentful/renderers";
-import { fadeAnimation } from "~next-contentful/animations";
-import { useInView } from "react-intersection-observer";
-import { css, styled } from "~next-contentful/config";
 import clsx from "clsx";
-import { RichText } from "~next-contentful/core/rich-text/rich-text";
+import { css, styled } from "~next-contentful/config";
+import { useInView } from "react-intersection-observer";
+import { fadeAnimation } from "~next-contentful/animations";
 import { Document } from "@contentful/rich-text-types";
 import type * as Stitches from "@stitches/react";
 
@@ -28,26 +27,25 @@ export const Spotlight = ({ section }: SpotlightProps) => {
 
   const Container = isSection ? BaseSection : SpotlightContainer;
 
-  const { ref, inView } = useInView({
-    initialInView: true,
-    rootMargin: "-100px",
-  });
+  const { ref, inView } = useInView();
 
   return (
-    <Container {...{ size, backgroundColor }} id={sectionName}>
+    <Container id={sectionName} size={size} backgroundColor={backgroundColor}>
       <SpotlightPrimaryContainer mode={reverse ? "reverse" : "normal"}>
         <RichText
-          {...{
-            content,
-            css: customContentStyles,
-            className: clsx(
-              reverse ? reverseContentContainerStyles : contentContainerStyles
-            ),
-          }}
+          content={content}
+          css={customContentStyles}
+          className={clsx(
+            reverse ? reverseContentContainerStyles : contentContainerStyles
+          )}
         />
         <Asset
           ref={ref}
           asset={asset}
+          layout="responsive"
+          placeholder="blur"
+          sizes="50vw"
+          loading="lazy"
           className={clsx(
             fadeAnimation({
               type: `${inView ? (reverse ? "inLeft" : "inRight") : "out"}`,
@@ -57,10 +55,6 @@ export const Spotlight = ({ section }: SpotlightProps) => {
               [assetStyles]: reverse,
             }
           )}
-          layout="responsive"
-          placeholder="blur"
-          sizes="50vw"
-          loading="lazy"
         />
       </SpotlightPrimaryContainer>
     </Container>

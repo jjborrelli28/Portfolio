@@ -5,15 +5,15 @@ import {
   ContainerProps,
   Icon,
   ImageProps,
+  RichText,
 } from "~next-contentful/core";
-import { RichText } from "~next-contentful/core/rich-text/rich-text";
-import { Document } from "@contentful/rich-text-types";
-import { useInView } from "react-intersection-observer";
-import { css } from "~next-contentful/config";
-import clsx from "clsx";
 import Link from "next/link";
+import clsx from "clsx";
+import { css } from "~next-contentful/config";
+import { useInView } from "react-intersection-observer";
 import { fadeAnimation } from "~next-contentful/animations";
 import { bounceAnimation } from "~next-contentful/animations/bounce";
+import { Document } from "@contentful/rich-text-types";
 import type * as Stitches from "@stitches/react";
 
 export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
@@ -33,47 +33,38 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
 
   return (
     <BaseSection
-      {...{
-        id: sectionName,
-        size,
-        backgroundColor,
-        css: {
-          position: "relative",
-          display: "grid",
-          gridTemplateRows: "2fr 3fr",
-          gridTemplateColumns: "1fr",
-          h: "100vh",
-          pt: "$headerMobile",
+      id={sectionName}
+      size={size}
+      backgroundColor={backgroundColor}
+      css={{
+        position: "relative",
+        display: "grid",
+        gridTemplateRows: "2fr 3fr",
+        gridTemplateColumns: "1fr",
+        h: "100vh",
+        pt: "$headerMobile",
 
-          "@bp2": {
-            gridTemplateRows: "1fr",
-            gridTemplateColumns: "3fr 2fr",
-            pt: "$headerDesktop",
-          },
+        "@bp2": {
+          gridTemplateRows: "1fr",
+          gridTemplateColumns: "3fr 2fr",
+          pt: "$headerDesktop",
         },
       }}
     >
-      <RichText
-        {...{
-          content,
-          css: customContentStyles,
-        }}
-      />
+      <RichText content={content} css={customContentStyles} />
       <Asset
-        {...{
-          ref: refAsset,
-          asset,
-          css: { maxw: "500px" },
-          assetClassName: clsx(
-            fadeAnimation({
-              type: assetInView ? "inRight" : "out",
-              time: 1000,
-            })
-          ),
-          layout: "responsive",
-          sizes: "50vw",
-        }}
+        ref={refAsset}
+        asset={asset}
+        layout="responsive"
+        sizes="50vw"
         priority
+        css={{ maxw: "500px" }}
+        assetClassName={clsx(
+          fadeAnimation({
+            type: assetInView ? "inRight" : "out",
+            time: 1000,
+          })
+        )}
       />
       <Link href={arrowDownLink} aria-label="Arrow scroll indicator">
         <a>

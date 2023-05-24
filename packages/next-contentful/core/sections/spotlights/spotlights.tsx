@@ -2,12 +2,12 @@ import {
   BackgroundColorBaseSectionProps,
   BaseSection,
   ContainerProps,
+  RichText,
   Spotlight,
   SportlightFieldsProps,
 } from "~next-contentful/core";
-import { fadeAnimation } from "~next-contentful/animations";
 import { useInView } from "react-intersection-observer";
-import { RichText } from "~next-contentful/core/rich-text/rich-text";
+import { fadeAnimation } from "~next-contentful/animations";
 import { Document } from "@contentful/rich-text-types";
 import type * as Stitches from "@stitches/react";
 
@@ -24,7 +24,7 @@ export const Spotlights = ({ section }: SpotlightsProps) => {
   const { ref: headlineRef, inView: headlineInView } = useInView();
 
   return (
-    <BaseSection {...{ size, backgroundColor }} id={sectionName}>
+    <BaseSection id={sectionName} size={size} backgroundColor={backgroundColor}>
       <RichText
         ref={headlineRef}
         content={headline}

@@ -1,13 +1,13 @@
 import { StyledComponent } from "@stitches/react/types/styled-component";
 import { styled } from "~next-contentful/config";
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
 export const InputLabel = ({
   children,
   size,
   htmlFor,
   restProps,
-}: LabelProps) => {
+}: PropsWithChildren<LabelProps>) => {
   return (
     <BaseLabel size={size} htmlFor={htmlFor} {...restProps}>
       {children}
@@ -49,7 +49,6 @@ const BaseLabel = styled("label", {
 });
 
 type LabelProps = {
-  children: ReactNode;
   size: "sm" | "lg";
   htmlFor: string;
   restProps?: StyledComponent;

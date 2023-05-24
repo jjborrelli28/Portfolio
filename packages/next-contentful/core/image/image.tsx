@@ -81,8 +81,10 @@ export type ImageComponentProps = {
 export type ImageProps = {
   fields: {
     title: string;
+    description: string;
     light: MainImageProps;
-    dark: MainImageProps;
+    dark?: MainImageProps;
+    link?: string;
   };
   sys: {
     contentType: {

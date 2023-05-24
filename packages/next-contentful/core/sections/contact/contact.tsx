@@ -25,10 +25,7 @@ export const Contact = ({ section }: ContactProps) => {
     publicKey,
   } = section.fields;
 
-  const { ref, inView } = useInView({
-    initialInView: true,
-    rootMargin: "-100px",
-  });
+  const { ref, inView } = useInView();
 
   return (
     <BaseSection {...{ size, backgroundColor, ref }} id={sectionName}>
@@ -56,10 +53,7 @@ export const Contact = ({ section }: ContactProps) => {
 };
 
 const AssetForm = ({ asset }: AssetFormProps) => {
-  const { ref, inView } = useInView({
-    initialInView: true,
-    rootMargin: "-100px",
-  });
+  const { ref, inView } = useInView();
 
   return (
     <Asset
