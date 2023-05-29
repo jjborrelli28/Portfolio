@@ -4,7 +4,6 @@ import {
   NavigationItemFieldsProps,
   TextLink,
 } from "~next-contentful/core";
-import { TextProps, textRenderer } from "~next-contentful/renderers";
 import { styled } from "~next-contentful/config";
 
 export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
@@ -26,7 +25,7 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
         })}
       </SocialNetworksContainer>
       <CopyrightContainer>
-        {textRenderer(copyright)}
+        {/* {textRenderer(copyright)} */}
         {new Date().getFullYear()}
       </CopyrightContainer>
     </Footer>
@@ -87,6 +86,6 @@ export type FooterPrimaryFieldsProps = {
   fields: {
     backgroundColor: BackgroundColorBaseSectionProps;
     links: NavigationItemFieldsProps[];
-    copyright: TextProps;
+    copyright: string;
   };
 };

@@ -5,96 +5,80 @@ import {
   ContactForm,
   ContainerProps,
   ImageProps,
-  TextContainer,
 } from "~next-contentful/core";
-import { TextProps, textRenderer } from "~next-contentful/renderers";
 import { fadeAnimation } from "~next-contentful/animations";
 import { useInView } from "react-intersection-observer";
 import { css, styled } from "~next-contentful/config";
 import clsx from "clsx";
+import { RichText } from "~next-contentful/core/rich-text/rich-text";
+import { Document } from "@contentful/rich-text-types";
+import type * as Stitches from "@stitches/react";
 
 export const Contact = ({ section }: ContactProps) => {
   const {
     sectionName,
     size,
     backgroundColor,
-    headline,
+    content,
+    customContentStyles,
     asset,
     serviceId,
     templateId,
     publicKey,
   } = section.fields;
 
-  const { ref, inView } = useInView();
+  const { ref: headlineRef, inView: headlineInView } = useInView();
 
   return (
-    <BaseSection {...{ size, backgroundColor, ref }} id={sectionName}>
-      <TextContainer
+    <BaseSection
+      id={sectionName}
+      ref={headlineRef}
+      size={size}
+      backgroundColor={backgroundColor}
+    >
+      <RichText
+        content={content}
+        css={
+          customContentStyles || {
+            color: "$fontSecondary",
+          }
+        }
         className={fadeAnimation({
-          type: inView ? "inLeft" : "out",
+          type: headlineInView ? "inLeft" : "out",
           time: 1000,
         })}
-      >
-        {textRenderer(headline, headlineStyles)}
-      </TextContainer>
-      <FormWithAsset>
+      />
+      <FormGrid>
         <ContactForm
-          {...{
-            serviceId,
-            templateId,
-            publicKey,
-            className: contactFormStyles,
-          }}
+          serviceId={serviceId}
+          templateId={templateId}
+          publicKey={publicKey}
+          className={css({
+            mb: "3rem",
+            "@bp2": { mb: "0", pb: "3rem", justifyContent: "center" },
+          })()}
         />
-        <AssetForm asset={asset} />
-      </FormWithAsset>
+        <Asset
+          ref={headlineRef}
+          asset={asset}
+          className={clsx(
+            css({ maxw: "500px" })(),
+            fadeAnimation({
+              type: `${headlineInView ? "inRight" : "out"}`,
+              time: 1000,
+            })
+          )}
+          layout="responsive"
+          placeholder="blur"
+          sizes="50vw"
+          loading="lazy"
+        />
+      </FormGrid>
     </BaseSection>
   );
 };
 
-const AssetForm = ({ asset }: AssetFormProps) => {
-  const { ref, inView } = useInView();
-
-  return (
-    <Asset
-      ref={ref}
-      asset={asset}
-      className={clsx(
-        assetStyles,
-        fadeAnimation({
-          type: `${inView ? "inRight" : "out"}`,
-          time: 1000,
-        })
-      )}
-      layout="responsive"
-      placeholder="blur"
-      sizes="50vw"
-      loading="lazy"
-    />
-  );
-};
-
-type AssetFormProps = {
-  asset: ImageProps;
-};
-
-const headlineStyles = css({
-  color: "$fontSecondary",
-  mb: "3rem",
-
-  "@bp2": {
-    mb: "3rem",
-  },
-})();
-
-const contactFormStyles = css({
-  mb: "3rem",
-  "@bp2": { mb: "0", pb: "3rem", justifyContent: "center" },
-}).toString();
-
-const assetStyles = css({ maxw: "500px" }).toString();
-
-export const FormWithAsset = styled("div", {
+export const FormGrid = styled("div", {
   position: "relative",
   display: "grid",
 
@@ -114,7 +98,8 @@ type ContactFieldsProps = {
     sectionName: string;
     size: ContainerProps;
     backgroundColor: BackgroundColorBaseSectionProps;
-    headline: TextProps;
+    content: Document;
+    customContentStyles: Stitches.CSS;
     asset: ImageProps;
     serviceId: string;
     templateId: string;
