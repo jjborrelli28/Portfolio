@@ -5,9 +5,13 @@ import {
   TextLink,
 } from "~next-contentful/core";
 import { styled } from "~next-contentful/config";
+import { RichText } from "~next-contentful/core/rich-text/rich-text";
+import { Document } from "@contentful/rich-text-types";
+import type * as Stitches from "@stitches/react";
 
 export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
-  const { backgroundColor, links, copyright } = section.fields;
+  const { backgroundColor, links, copyright, customCopyrightStyles } =
+    section.fields;
 
   return (
     <Footer backgroundColor={backgroundColor}>
@@ -25,7 +29,14 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
         })}
       </SocialNetworksContainer>
       <CopyrightContainer>
-        {/* {textRenderer(copyright)} */}
+        <RichText
+          content={copyright}
+          css={
+            customCopyrightStyles || {
+              color: "$fontTertiary",
+            }
+          }
+        />
         {new Date().getFullYear()}
       </CopyrightContainer>
     </Footer>
@@ -86,6 +97,7 @@ export type FooterPrimaryFieldsProps = {
   fields: {
     backgroundColor: BackgroundColorBaseSectionProps;
     links: NavigationItemFieldsProps[];
-    copyright: string;
+    copyright: Document;
+    customCopyrightStyles: Stitches.CSS;
   };
 };

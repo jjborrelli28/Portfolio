@@ -28,7 +28,6 @@ export * from "./sections/base-section";
 export * from "./sections/contact/contact";
 export * from "./sections/grid/grid";
 export * from "./sections/footer/footer-primary";
-export * from "./sections/footer/footer-types";
 export * from "./sections/grid/grid";
 export * from "./sections/heros/hero-primary";
 export * from "./sections/heros/hero-types";
