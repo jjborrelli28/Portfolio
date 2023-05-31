@@ -1,4 +1,4 @@
-const withTM = require("next-transpile-modules")(["@next-contentful/ui"]);
+const withTM = require("next-transpile-modules")(["@space-ui"]);
 
 module.exports = withTM({
   reactStrictMode: true,

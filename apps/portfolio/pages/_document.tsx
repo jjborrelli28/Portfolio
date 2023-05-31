@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import { getCssText } from "@next-contentful/ui";
 import Script from "next/script";
+import { getCssText } from "@space-ui";
 
 class PortfolioDocument extends Document<any> {
   render() {

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.2",
-    "@next-contentful/ui": "workspace:*",
+    "@space-ui": "workspace:*",
     "@stitches/react": "^1.2.8",
     "contentful": "^9.1.31",
     "next": "12.1.6",

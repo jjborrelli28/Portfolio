@@ -11,8 +11,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~next-contentful/*": [
-        "../../packages/next-contentful/*"
+      "@space-ui/*": [
+        "../../packages/space-ui/*"
       ],
       "@emotion/core": [
         "node_modules/@emotion/react"

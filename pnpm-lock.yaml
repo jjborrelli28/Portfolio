@@ -15,7 +15,7 @@ importers:
   apps/portfolio:
     specifiers:
       '@babel/core': ^7.18.2
-      '@next-contentful/ui': workspace:*
+      '@space-ui': workspace:*
       '@stitches/react': ^1.2.8
       '@types/node': ^17.0.39
       '@types/react': 18.0.10
@@ -35,7 +35,7 @@ importers:
       typescript: ^4.7.2
     dependencies:
       '@babel/core': 7.18.5
-      '@next-contentful/ui': link:../../packages/next-contentful
+      '@space-ui': link:../../packages/space-ui
       '@stitches/react': 1.2.8_react@18.1.0
       contentful: 9.1.31
       next: 12.1.6_ebaa45d3dbea869421c3cff94006b92d
@@ -65,7 +65,7 @@ importers:
       eslint-config-prettier: 8.5.0
       eslint-plugin-react: 7.28.0
 
-  packages/next-contentful:
+  packages/space-ui:
     specifiers:
       '@babel/core': ^7.18.2
       '@contentful/rich-text-html-renderer': ^15.13.1

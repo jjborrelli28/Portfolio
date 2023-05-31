@@ -1,6 +1,6 @@
+import { ParticlesBackground } from "components/particles-background";
 import { AppProps } from "next/app";
-import { BaseLayout, globalStyles, ThemeProvider } from "@next-contentful/ui";
-import { ParticlesBackground } from "components/particles-background/particles-background";
+import { BaseLayout, globalStyles, ThemeProvider } from "@space-ui";
 import "../styles/app.css";
 
 function Portfolio({ Component, pageProps }: AppProps) {

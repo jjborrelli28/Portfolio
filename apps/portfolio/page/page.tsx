@@ -1,17 +1,17 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Header, HeaderController, Main, MetaTags } from "@space-ui";
 import { PageProps } from "../types";
-import { Header, HeaderController, Main, MetaTags } from "@next-contentful/ui";
 
 export const Page = React.memo(({ data }: PageProps) => {
-  const { metaTags, header, main } = data;
+  const { metaTags, header, content } = data;
 
   return (
-    <Fragment>
-      <MetaTags {...{ metaTags }} />
+    <React.Fragment>
+      <MetaTags metaTags={metaTags} />
       <HeaderController>
-        <Header {...{ header }} />
-        <Main {...{ main }} />
+        <Header header={header} />
+        <Main content={content} />
       </HeaderController>
-    </Fragment>
+    </React.Fragment>
   );
 });

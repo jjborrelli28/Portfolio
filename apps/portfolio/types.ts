@@ -2,12 +2,12 @@ import {
   HeaderFieldsProps,
   MetaTagsFieldsProps,
   SectionProps,
-} from "@next-contentful/ui";
+} from "@space-ui";
 
 export type DataProps = {
-  metaTags: MetaTagsFieldsProps;
-  header: HeaderFieldsProps;
-  main?: SectionProps[];
+  metaTags?: MetaTagsFieldsProps;
+  header?: HeaderFieldsProps;
+  content?: SectionProps[];
 };
 
 export type PageProps = {
