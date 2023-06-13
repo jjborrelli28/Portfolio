@@ -54,11 +54,7 @@ const SocialNetworksContainer = styled("div", {
     color: "$fontTertiary",
     textDecoration: "none",
     transition: "all 0.3s",
-    fontSize: "$12",
-
-    "@bp2": {
-      fontSize: "$14",
-    },
+    fontSize: "$14",
   },
 });
 

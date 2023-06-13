@@ -47,7 +47,7 @@ const placeholder = {
   fields: {
     title: "Placeholder",
     file: {
-      url: "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=",
+      url: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
       details: {
         image: {
           height: 500,

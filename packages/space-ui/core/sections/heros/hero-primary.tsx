@@ -70,8 +70,8 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
         })}
         css={{ maxw: "500px" }}
       />
-      <Link href={arrowDownLink} aria-label="Arrow scroll indicator">
-        <a>
+      <Link href={arrowDownLink}>
+        <a aria-label="Arrow scroll indicator">
           <Icon
             type="arrow-down"
             className={clsx(

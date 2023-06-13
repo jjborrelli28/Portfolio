@@ -9,8 +9,10 @@ export const TextLink = ({
   className,
 }: PropsWithChildren<TextLinkProps>) => {
   return (
-    <Link href={href} target={target} aria-label={ariaLabel} data-href={href}>
-      <a className={className}>{children}</a>
+    <Link href={href} target={target} data-href={href}>
+      <a className={className} aria-label={ariaLabel}>
+        {children}
+      </a>
     </Link>
   );
 };

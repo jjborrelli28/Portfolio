@@ -39,8 +39,10 @@ export const CardLink = ({
   className,
 }: PropsWithChildren<CardLinkProps>) => {
   return (
-    <Link href={href} target={target} aria-label={ariaLabel}>
-      <a className={className}>{children}</a>
+    <Link href={href} target={target}>
+      <a aria-label={ariaLabel} className={className}>
+        {children}
+      </a>
     </Link>
   );
 };
