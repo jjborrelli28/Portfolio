@@ -62,7 +62,6 @@ export const Contact = ({ section }: ContactProps) => {
           asset={asset}
           layout="responsive"
           sizes="50vw"
-          loading="lazy"
           className={fadeAnimation({
             type: `${headlineInView ? "inRight" : "out"}`,
             time: 1000,

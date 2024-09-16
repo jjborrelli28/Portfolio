@@ -36,6 +36,7 @@ export const LanguageSwitcher = ({
     router.push(router.asPath, router.asPath, {
       locale: newLocale.split("-")[0],
     });
+    setIsOpen(false);
   };
 
   return (

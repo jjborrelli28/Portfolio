@@ -1,6 +1,7 @@
 import { fadeAnimation, slidePrimaryAnimation } from "@space-ui/animations";
 import { css, styled } from "@space-ui/config";
 import { Asset, ImageProps } from "@space-ui/core";
+import Link from "next/link";
 
 export const Pictures = ({
   pictures,
@@ -22,19 +23,21 @@ export const Pictures = ({
         })}
       >
         {pictures?.map((picture, index) => {
+          const link = picture.fields.link;
+
           return (
-            <Asset
-              key={index}
-              asset={picture}
-              layout="responsive"
-              sizes="33vw"
-              loading="lazy"
-              assetClassName={picturesStyles}
-              className={fadeAnimation({
-                type: inView ? "in" : "out",
-                time: 1000,
-              })}
-            />
+            <Link key={index} href={link || "#"}>
+              <Asset
+                asset={picture}
+                layout="responsive"
+                sizes="33vw"
+                assetClassName={picturesStyles}
+                className={fadeAnimation({
+                  type: inView ? "in" : "out",
+                  time: 1000,
+                })}
+              />
+            </Link>
           );
         })}
       </PicturesRow>
@@ -57,10 +60,11 @@ const PicturesRow = styled("div", {
 });
 
 const picturesStyles = css({
-  transition: "all 0.3s ease-in",
+  transition: "filter 0.3s ease-in",
+  cursor: "pointer",
 
   "&:hover": {
-    filter: "brightness(1.15)",
+    filter: "brightness(1.25)",
   },
 }).toString();
 

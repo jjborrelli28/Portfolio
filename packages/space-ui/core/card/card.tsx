@@ -74,7 +74,6 @@ export const CardImage = ({
         }).toString()}
         layout="responsive"
         sizes="50vw"
-        loading="lazy"
       />
     </ImageContainer>
   );
@@ -178,7 +177,6 @@ export const CardContent = ({
                         asset={entry.data.target}
                         layout="responsive"
                         sizes="5vw"
-                        loading="lazy"
                         className={css({
                           m: "0",
                           w: "20px",

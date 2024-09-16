@@ -128,7 +128,12 @@ export const createDefaultBlockRenderers = (
 
         return (
           <Paragraph css={customStyles}>
-            <span className={css({ lineHeight: "1.1" }).toString()}>
+            <span
+              className={css({
+                lineHeight: "1.1",
+                position: "absolute",
+              }).toString()}
+            >
               {text}
             </span>
             <Cursor />

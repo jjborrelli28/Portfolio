@@ -48,7 +48,6 @@ export const Spotlight = ({ section }: SpotlightProps) => {
           asset={asset}
           layout="responsive"
           sizes="50vw"
-          loading="lazy"
           className={clsx(
             fadeAnimation({
               type: `${inView ? (reverse ? "inLeft" : "inRight") : "out"}`,
