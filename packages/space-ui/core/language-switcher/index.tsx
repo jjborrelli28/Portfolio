@@ -100,11 +100,12 @@ const DropdownMenuContainer = styled("div", {
 
 const DropdownMenu = styled("div", {
   position: "absolute",
-  top: "24px",
+  top: "40px",
   right: "0",
   display: "grid",
-  backgroundColor: "lightGray",
+  backgroundColor: "$bgPrimary",
   transition: "grid-template-rows 0.3s, opacity 0.3s",
+  borderTop: "$line 2px solid",
   boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
   zIndex: 10,
 
