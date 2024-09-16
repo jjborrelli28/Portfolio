@@ -73,7 +73,6 @@ export const CardImage = ({
           borderRadius: top ? "2px 2px 0 0" : bottom ? "0 0 2px 2px" : "none",
         }).toString()}
         layout="responsive"
-        placeholder="blur"
         sizes="50vw"
         loading="lazy"
       />
@@ -178,7 +177,6 @@ export const CardContent = ({
                         key={index}
                         asset={entry.data.target}
                         layout="responsive"
-                        placeholder="blur"
                         sizes="5vw"
                         loading="lazy"
                         className={css({

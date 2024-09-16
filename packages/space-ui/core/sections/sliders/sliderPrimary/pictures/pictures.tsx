@@ -27,7 +27,6 @@ export const Pictures = ({
               key={index}
               asset={picture}
               layout="responsive"
-              placeholder="blur"
               sizes="33vw"
               loading="lazy"
               assetClassName={picturesStyles}

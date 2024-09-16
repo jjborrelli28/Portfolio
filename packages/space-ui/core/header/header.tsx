@@ -1,9 +1,10 @@
 import {
-  HeaderContainer,
   ContainerProps,
   Hamburger,
+  HeaderContainer,
   HeaderMenu,
   HeaderMenuContent,
+  ImageProps,
   InitialStateProps,
   Navigation,
   NavigationItemFieldsProps,
@@ -11,11 +12,12 @@ import {
   useHeaderContext,
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
+import { LanguageSwitcher } from "../language-switcher";
 
 export const Header = ({ header, className, css }: HeaderProps) => {
   if (!header) return null;
 
-  const { navigation, size = "lg" } = header.fields;
+  const { size = "lg", navigation, languageFlags } = header.fields;
 
   const { status, setStatus } = useHeaderContext();
 
@@ -36,6 +38,7 @@ export const Header = ({ header, className, css }: HeaderProps) => {
         <HeaderMenuContent status={status}>
           <Navigation navigation={navigation} />
           <ThemeToggle />
+          <LanguageSwitcher languageFlags={languageFlags} />
         </HeaderMenuContent>
       </HeaderMenu>
     </HeaderContainer>
@@ -50,7 +53,8 @@ type HeaderProps = {
 
 export type HeaderFieldsProps = {
   fields: {
-    navigation: NavigationItemFieldsProps[];
     size?: ContainerProps;
+    navigation: NavigationItemFieldsProps[];
+    languageFlags?: ImageProps[];
   };
 };

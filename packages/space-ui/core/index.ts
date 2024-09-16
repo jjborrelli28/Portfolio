@@ -17,6 +17,7 @@ export * from "./input-container/input-container";
 export * from "./input-label/input-label";
 export * from "./input-text/input-text";
 export * from "./input-textarea/input-textarea";
+export * from "./language-switcher";
 export * from "./main/main";
 export * from "./meta-tags/meta-tags";
 export * from "./navigation/navigation";

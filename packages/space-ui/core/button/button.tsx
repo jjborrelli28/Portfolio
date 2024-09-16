@@ -112,7 +112,7 @@ export const BaseButton = styled("button", {
 });
 
 type ButtonProps = {
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   size?: "sm" | "md" | "lg";
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

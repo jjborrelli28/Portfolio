@@ -21,22 +21,16 @@ export const Image = ({ props, ...restProps }: ImageComponentProps) => {
   };
 
   const layout = restProps.layout ?? "intrinsic";
-  const height = restProps.height ?? image.fields.file.details.image.height;
-  const width = restProps.width ?? image.fields.file.details.image.width;
+  const height = restProps.height ?? image.fields.file?.details.image.height;
+  const width = restProps.width ?? image.fields.file?.details.image.width;
   const sizes = layout !== "fill" ? { height, width } : null;
-  const widthBlurImage = 50;
-  const blurDataURL = `${image.fields.file.url}?w=${widthBlurImage}&h=${
-    Math.round((Number(height) / Number(width)) * widthBlurImage) ||
-    widthBlurImage
-  }&q=80`;
 
   return (
     <NextImage
-      src={image?.fields.file.url}
+      src={image?.fields.file?.url}
       loader={contentfulImageLoader}
       alt={image.fields.title}
       key={image.fields.title}
-      blurDataURL={restProps.placeholder === "blur" ? blurDataURL : ""}
       {...sizes}
       {...restProps}
     />
@@ -73,7 +67,7 @@ const resolveImage = (resolvedTheme: NextThemeProps, image: ImageProps) => {
 
 type NextThemeProps = string | undefined;
 
- type ImageComponentProps = {
+type ImageComponentProps = {
   props: ImageProps;
 } & Omit<NextImageProps, "src">;
 
@@ -97,6 +91,7 @@ export type ImageProps = {
 type Image = {
   fields: {
     title: string;
+    description: string;
     file: {
       url: string;
       details: {

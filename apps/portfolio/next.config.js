@@ -11,4 +11,8 @@ module.exports = withTM({
   typescript: {
     ignoreBuildErrors: true,
   },
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "es",
+  },
 });

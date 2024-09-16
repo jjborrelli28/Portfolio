@@ -61,7 +61,6 @@ export const Contact = ({ section }: ContactProps) => {
           ref={headlineRef}
           asset={asset}
           layout="responsive"
-          placeholder="blur"
           sizes="50vw"
           loading="lazy"
           className={fadeAnimation({

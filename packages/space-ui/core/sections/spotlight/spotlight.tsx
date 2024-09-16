@@ -47,7 +47,6 @@ export const Spotlight = ({ section }: SpotlightProps) => {
         <Asset
           asset={asset}
           layout="responsive"
-          placeholder="blur"
           sizes="50vw"
           loading="lazy"
           className={clsx(

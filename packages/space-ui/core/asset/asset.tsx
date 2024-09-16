@@ -24,12 +24,7 @@ export const Asset = forwardRef<HTMLInputElement, AssetProps>(
           css={{ h: layout === "fill" ? "$full" : "auto" }}
           ref={ref}
         >
-          <Image
-            className={assetClassName}
-            placeholder="blur"
-            props={asset}
-            {...restProps}
-          />
+          <Image className={assetClassName} props={asset} {...restProps} />
         </AssetContainer>
       );
     }

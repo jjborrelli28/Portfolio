@@ -2,6 +2,7 @@ import { css as classCreator, styled } from "@space-ui/config";
 import { Container, ContainerProps } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -15,6 +16,7 @@ export const HeaderContainer = ({
   const { ref: topRef, inView: topInView } = useInView({
     initialInView: true,
   });
+
 
   return (
     <>

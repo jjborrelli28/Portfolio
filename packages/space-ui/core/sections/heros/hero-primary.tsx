@@ -25,7 +25,6 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
     asset,
     arrowDownLink,
   } = section.fields;
-
   const { ref, inView } = useInView({
     initialInView: true,
   });
@@ -61,7 +60,6 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
       />
       <Asset
         asset={asset}
-        layout="responsive"
         sizes="50vw"
         priority
         assetClassName={fadeAnimation({

@@ -8,6 +8,7 @@
     "paths": {
       "@space-ui/*": ["./*"],
       "@emotion/core": ["node_modules/@emotion/react"]
-    }
+    },
+    "jsx": "preserve"
   }
 }
