@@ -22,7 +22,11 @@ import {
 } from "./rich-text-types";
 import { css } from "@space-ui/config";
 
-const parseContents = (contents: any) => {
+const parseContents = (
+  contents: any,
+  underlineRef: any,
+  underlineInView: boolean
+) => {
   if (!contents.every((content: any) => content.type?.className === "c-FMIrA"))
     return contents;
 
@@ -30,13 +34,9 @@ const parseContents = (contents: any) => {
     return content.props.children;
   });
 
-  const { ref: underlineView, inView: underlineInView } = useInView({
-    initialInView: false,
-  });
-
   return (
     <Underline
-      ref={underlineView}
+      ref={underlineRef}
       className={secondaryUnderlineAnimation({
         time: 500,
         active: underlineInView,
@@ -47,83 +47,97 @@ const parseContents = (contents: any) => {
   );
 };
 
-export const createDefaultBlockRenderers = (blockClass: BlockClass) => ({
-  [BLOCKS.HEADING_1]: (_node: any, children: any) => (
-    <Heading1 className={blockClass[BLOCKS.HEADING_1]}>
-      {parseContents(children)}
-    </Heading1>
-  ),
-  [BLOCKS.HEADING_2]: (_node: any, children: any) => (
-    <Heading2 className={blockClass[BLOCKS.HEADING_2]}>
-      {parseContents(children)}
-    </Heading2>
-  ),
-  [BLOCKS.HEADING_3]: (_node: any, children: any) => (
-    <Heading3 className={blockClass[BLOCKS.HEADING_3]}>
-      {parseContents(children)}
-    </Heading3>
-  ),
-  [BLOCKS.HEADING_4]: (_node: any, children: any) => (
-    <Heading4 className={blockClass[BLOCKS.HEADING_4]}>
-      {parseContents(children)}
-    </Heading4>
-  ),
-  [BLOCKS.HEADING_5]: (_node: any, children: any) => (
-    <Heading5 className={blockClass[BLOCKS.HEADING_5]}>
-      {parseContents(children)}
-    </Heading5>
-  ),
-  [BLOCKS.HEADING_6]: (_node: any, children: any) => (
-    <Heading6 className={blockClass[BLOCKS.HEADING_6]}>
-      {parseContents(children)}
-    </Heading6>
-  ),
-  [BLOCKS.PARAGRAPH]: (_node: any, children: any) => {
-    if (children[0] === "") return null;
-
-    return (
-      <Paragraph className={blockClass[BLOCKS.PARAGRAPH]}>
-        {parseContents(children)}
-      </Paragraph>
-    );
-  },
-  [BLOCKS.OL_LIST]: (_node: any, children: any) => (
-    <ol className={blockClass[BLOCKS.OL_LIST]}>{parseContents(children)}</ol>
-  ),
-  [BLOCKS.UL_LIST]: (_node: any, children: any) => (
-    <ul className={blockClass[BLOCKS.UL_LIST]}>{parseContents(children)}</ul>
-  ),
-  [BLOCKS.LIST_ITEM]: (_node: any, children: any) => (
-    <li className={blockClass[BLOCKS.LIST_ITEM]}>{parseContents(children)}</li>
-  ),
-  [BLOCKS.QUOTE]: (_node: any, children: any) => (
-    <blockquote className={blockClass[BLOCKS.QUOTE]}>
-      {parseContents(children)}
-    </blockquote>
-  ),
-  [BLOCKS.HR]: () => <hr className={blockClass[BLOCKS.HR]} />,
-  [BLOCKS.EMBEDDED_ENTRY]: (_node: any, children: any) => {
-    const embeddedEntryName = _node.data.target.sys.contentType.sys.id;
-
-    if (embeddedEntryName === "typeWriter") {
-      const { content, customStyles } = _node.data.target.fields;
-
-      const { text } = useTypewriter({
-        words: [...content],
-        typeSpeed: 125,
-        deleteSpeed: 100,
-        loop: 0,
-      });
+export const createDefaultBlockRenderers = (
+  blockClass: BlockClass,
+  underlineRef: (node?: Element | null) => void,
+  underlineInView: boolean
+) => {
+  return {
+    [BLOCKS.HEADING_1]: (_node: any, children: any) => (
+      <Heading1 className={blockClass[BLOCKS.HEADING_1]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading1>
+    ),
+    [BLOCKS.HEADING_2]: (_node: any, children: any) => (
+      <Heading2 className={blockClass[BLOCKS.HEADING_2]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading2>
+    ),
+    [BLOCKS.HEADING_3]: (_node: any, children: any) => (
+      <Heading3 className={blockClass[BLOCKS.HEADING_3]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading3>
+    ),
+    [BLOCKS.HEADING_4]: (_node: any, children: any) => (
+      <Heading4 className={blockClass[BLOCKS.HEADING_4]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading4>
+    ),
+    [BLOCKS.HEADING_5]: (_node: any, children: any) => (
+      <Heading5 className={blockClass[BLOCKS.HEADING_5]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading5>
+    ),
+    [BLOCKS.HEADING_6]: (_node: any, children: any) => (
+      <Heading6 className={blockClass[BLOCKS.HEADING_6]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </Heading6>
+    ),
+    [BLOCKS.PARAGRAPH]: (_node: any, children: any) => {
+      if (children[0] === "") return null;
 
       return (
-        <Paragraph css={customStyles}>
-          <span className={css({ lineHeight: "1.1" }).toString()}>{text}</span>
-          <Cursor />
+        <Paragraph className={blockClass[BLOCKS.PARAGRAPH]}>
+          {parseContents(children, underlineRef, underlineInView)}
         </Paragraph>
       );
-    }
-  },
-});
+    },
+    [BLOCKS.OL_LIST]: (_node: any, children: any) => (
+      <ol className={blockClass[BLOCKS.OL_LIST]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </ol>
+    ),
+    [BLOCKS.UL_LIST]: (_node: any, children: any) => (
+      <ul className={blockClass[BLOCKS.UL_LIST]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </ul>
+    ),
+    [BLOCKS.LIST_ITEM]: (_node: any, children: any) => (
+      <li className={blockClass[BLOCKS.LIST_ITEM]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </li>
+    ),
+    [BLOCKS.QUOTE]: (_node: any, children: any) => (
+      <blockquote className={blockClass[BLOCKS.QUOTE]}>
+        {parseContents(children, underlineRef, underlineInView)}
+      </blockquote>
+    ),
+    [BLOCKS.HR]: () => <hr className={blockClass[BLOCKS.HR]} />,
+    [BLOCKS.EMBEDDED_ENTRY]: (_node: any, children: any) => {
+      const embeddedEntryName = _node.data.target.sys.contentType.sys.id;
+
+      if (embeddedEntryName === "typeWriter") {
+        const { content, customStyles } = _node.data.target.fields;
+
+        const { text } = useTypewriter({
+          words: [...content],
+          typeSpeed: 125,
+          deleteSpeed: 100,
+          loop: 0,
+        });
+
+        return (
+          <Paragraph css={customStyles}>
+            <span className={css({ lineHeight: "1.1" }).toString()}>
+              {text}
+            </span>
+            <Cursor />
+          </Paragraph>
+        );
+      }
+    },
+  };
+};
 
 export const createDefaultInlineRenderers = (inlineClass: InlineClass) => ({
   [INLINES.HYPERLINK]: (node: any, children: any) => (
@@ -139,7 +153,9 @@ export const createDefaultInlineRenderers = (inlineClass: InlineClass) => ({
 });
 
 export const buildRenderMarks = (
-  markClass: RenderMarkClass
+  markClass: RenderMarkClass,
+  underlineRef: (node?: Element | null) => void,
+  underlineInView: boolean
 ): RenderMarksType => ({
   [MARKS.BOLD]: (text: ReactNode) => (
     <strong className={markClass[MARKS.BOLD]}>{text}</strong>
@@ -148,10 +164,6 @@ export const buildRenderMarks = (
     <i className={markClass[MARKS.ITALIC]}>{text}</i>
   ),
   [MARKS.UNDERLINE]: (text: ReactNode) => {
-    const { ref: underlineRef, inView: underlineInView } = useInView({
-      initialInView: false,
-    });
-
     return (
       <Underline
         ref={underlineRef}

@@ -16,7 +16,6 @@ export const sectionRenderer = (section: SectionProps, index: number) => {
     return null;
   }
 
-  if (section.sys.contentType?.sys.id !== "heroPrimary") return null;
   return <Comp section={section} key={index} />;
 };
 

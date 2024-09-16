@@ -14,6 +14,7 @@ import {
 } from "./rich-text-utils";
 import { RichTextContainer } from "./rich-text-container";
 import type * as Stitches from "@stitches/react";
+import { useInView } from "react-intersection-observer";
 
 export interface RichTextProps {
   content?: Document;
@@ -40,8 +41,13 @@ export const RichText = forwardRef(
   ) => {
     if (!content) return null;
 
+    const { ref: underlineRef, inView: underlineInView } = useInView({
+      initialInView: false,
+    });
+
     const defaultBlockRenderers = useMemo(
-      () => createDefaultBlockRenderers(blockClass),
+      () =>
+        createDefaultBlockRenderers(blockClass, underlineRef, underlineInView),
       [blockClass]
     );
 
@@ -51,7 +57,7 @@ export const RichText = forwardRef(
     );
 
     const defaultRenderMark = useMemo(
-      () => buildRenderMarks(markClass),
+      () => buildRenderMarks(markClass, underlineRef, underlineInView),
       [markClass]
     );
 
