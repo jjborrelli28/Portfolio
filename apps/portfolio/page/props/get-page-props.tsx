@@ -9,7 +9,7 @@ export const getPageProps: GetStaticProps = async (context) => {
   });
 
   const locale = parseLocale(context.locale);
-  console.log(locale);
+
   const response = await client.getEntries({
     content_type: "page",
     "fields.slug": "home",
