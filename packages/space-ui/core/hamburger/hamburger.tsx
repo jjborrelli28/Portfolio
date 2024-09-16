@@ -53,7 +53,7 @@ const Line = styled("span", {
   h: "3px",
   my: "3px",
   display: "block",
-  transition: "all ease-out 0.4s",
+  transition: "all ease-out 0.3s",
   transformOrigin: "0 0",
   backgroundColor: "$fontPrimary",
 });

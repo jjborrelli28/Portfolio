@@ -1,3 +1,4 @@
+import { fadeAnimation } from "@space-ui/animations";
 import { css, styled } from "@space-ui/config";
 import { Asset, ImageProps } from "@space-ui/core";
 import { useRouter } from "next/router";
@@ -39,7 +40,14 @@ export const LanguageSwitcher = ({
 
   return (
     <DropdownContainer>
-      <FlagButton onClick={toggleDropdown}>
+      <FlagButton
+        onClick={toggleDropdown}
+        className={fadeAnimation({
+          type: "inTop",
+          time: 1000,
+          mode: "mobile",
+        })}
+      >
         <Asset asset={languageFlag} className="" />
       </FlagButton>
       <DropdownMenuContainer>
@@ -101,13 +109,18 @@ const DropdownMenuContainer = styled("div", {
 const DropdownMenu = styled("div", {
   position: "absolute",
   top: "40px",
-  right: "0",
+  left: "0",
   display: "grid",
   backgroundColor: "$bgPrimary",
   transition: "grid-template-rows 0.3s, opacity 0.3s",
   borderTop: "$line 2px solid",
   boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
   zIndex: 10,
+
+  "@bp2": {
+    right: "0",
+    left: "initial",
+  },
 
   variants: {
     open: {

@@ -1,5 +1,5 @@
 import { fadeAnimation } from "@space-ui/animations";
-import { styled } from "@space-ui/config";
+import { css, styled } from "@space-ui/config";
 import { Icon, useTheme } from "@space-ui/core";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
@@ -30,7 +30,13 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
             className
           )}
         >
-          <Icon type={theme} />
+          <Icon
+            type={theme}
+            className={css({
+              transition: "color 0.3s",
+              "&:hover": { color: "$line" },
+            }).toString()}
+          />
         </BaseButton>
       )}
     </ButtonContainer>

@@ -20,6 +20,7 @@ import {
   RenderMarkClass,
   RenderMarksType,
 } from "./rich-text-types";
+import { css } from "@space-ui/config";
 
 const parseContents = (contents: any) => {
   if (!contents.every((content: any) => content.type?.className === "c-FMIrA"))
@@ -116,7 +117,7 @@ export const createDefaultBlockRenderers = (blockClass: BlockClass) => ({
 
       return (
         <Paragraph css={customStyles}>
-          <span>{text}</span>
+          <span className={css({ lineHeight: "1.1" }).toString()}>{text}</span>
           <Cursor />
         </Paragraph>
       );
