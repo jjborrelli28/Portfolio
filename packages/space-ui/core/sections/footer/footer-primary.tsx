@@ -2,42 +2,81 @@ import { Document } from "@contentful/rich-text-types";
 import { css, styled } from "@space-ui/config";
 import {
   BackgroundColorBaseSectionProps,
+  Container,
   Icon,
   NavigationItemFieldsProps,
   RichText,
   TextLink,
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
+import { useRouter } from "next/router";
 
 export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
+  const { locale } = useRouter();
+
   const { backgroundColor, links, copyright, customCopyrightStyles } =
     section.fields;
 
   return (
     <Footer backgroundColor={backgroundColor}>
-      <SocialNetworksContainer>
-        {links.map((link, index) => {
-          return (
-            <TextLink
-              key={index}
-              href={link.fields.url}
-              ariaLabel={`Personal's ${link.fields.reference}`}
-            >
-              <Icon type={link.fields.reference} />
-            </TextLink>
-          );
-        })}
-      </SocialNetworksContainer>
-      <CopyrightContainer>
-        <RichText
-          content={copyright}
+      <Container
+        size="xl"
+        css={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "0.25rem",
+          px: "2rem",
+
+          "@bp2": { gap: "0.5rem" },
+          "@bp5": { px: "0" },
+        }}
+      >
+        <SocialNetworksContainer>
+          {links.map((link, index) => {
+            return (
+              <TextLink
+                key={index}
+                href={link.fields.url}
+                ariaLabel={`Personal's ${link.fields.reference}`}
+              >
+                <Icon type={link.fields.reference} />
+              </TextLink>
+            );
+          })}
+        </SocialNetworksContainer>
+        <CopyrightContainer>
+          <RichText
+            content={copyright}
+            className={css({
+              color: "$fontTertiary",
+            }).toString()}
+            css={customCopyrightStyles}
+          />
+          {new Date().getFullYear()}
+        </CopyrightContainer>
+        <div
           className={css({
-            color: "$fontTertiary",
+            display: "flex",
+            justifyContent: "end",
+            w: "100%",
           }).toString()}
-          css={customCopyrightStyles}
-        />
-        {new Date().getFullYear()}
-      </CopyrightContainer>
+        >
+          <p
+            className={css({
+              fontSize: "$4",
+              mt: "2.5rem",
+              mb: "0",
+
+              "@bp2": { fontSize: "$6" },
+            }).toString()}
+          >
+            {locale === "es" ? "Hecho con amor" : "Made with love"} ❤️
+          </p>
+        </div>
+      </Container>
     </Footer>
   );
 };
@@ -61,16 +100,11 @@ const SocialNetworksContainer = styled("div", {
 const CopyrightContainer = styled("div", { display: "flex", "*": { m: "0" } });
 
 const Footer = styled("footer", {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "0.25rem",
-  p: "2rem",
+  py: "5rem",
   color: "$fontTertiary",
   fontSize: "$4",
 
-  "@bp2": { gap: "0.5rem", mt: "6rem", fontSize: "$8" },
+  "@bp2": { fontSize: "$8" },
 
   variants: {
     backgroundColor: {
