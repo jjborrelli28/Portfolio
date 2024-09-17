@@ -28,10 +28,8 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
           justifyContent: "center",
           alignItems: "center",
           gap: "0.25rem",
-          px: "2rem",
 
           "@bp2": { gap: "0.5rem" },
-          "@bp5": { px: "0" },
         }}
       >
         <SocialNetworksContainer>
@@ -67,6 +65,7 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
           <p
             className={css({
               fontSize: "$4",
+              fontStyle: "italic",
               mt: "2.5rem",
               mb: "0",
 
@@ -101,6 +100,7 @@ const CopyrightContainer = styled("div", { display: "flex", "*": { m: "0" } });
 
 const Footer = styled("footer", {
   py: "5rem",
+  px: "$5",
   color: "$fontTertiary",
   fontSize: "$4",
 

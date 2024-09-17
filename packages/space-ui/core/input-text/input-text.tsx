@@ -69,7 +69,7 @@ export const InputText = ({
 const baseStyles = css({
   fontFamily: "$main",
   fontWeight: "$1",
-  fontSize: "$5",
+  fontSize: "$13",
   color: "$fontPrimary",
   backgroundColor: "transparent",
   resize: "none",

@@ -77,7 +77,6 @@ export const BaseButton = styled("button", {
 
   "&:hover": {
     color: "$white",
-    cursor: "pointer",
 
     "&:before": {
       w: "100%",

@@ -7,9 +7,9 @@ import { useState } from "react";
 type Locales = "es-AR" | "en-US";
 
 export const parseLocale = (locale?: string) => {
-  if (locale?.startsWith("en")) return "en-US";
+  if (locale?.startsWith("es")) return "es-AR";
 
-  return "es-AR";
+  return "en-US";
 };
 
 export const LanguageSwitcher = ({
@@ -48,6 +48,13 @@ export const LanguageSwitcher = ({
           time: 1000,
           mode: "mobile",
         })}
+        css={{
+          transition: "filter 0.3s",
+
+          "&:hover": {
+            filter: "brightness(1.15)",
+          },
+        }}
       >
         <Asset asset={languageFlag} className="" />
       </FlagButton>
@@ -96,7 +103,6 @@ const FlagButton = styled("button", {
   backgroundColor: "transparent",
   p: "0",
   border: "none",
-  cursor: "pointer",
 
   "&:focus": {
     outline: "none",
@@ -148,5 +154,4 @@ const DropdownItem = styled("button", {
   backgroundColor: "transparent",
   p: "10px 7.5px",
   border: "none",
-  cursor: "pointer",
 });

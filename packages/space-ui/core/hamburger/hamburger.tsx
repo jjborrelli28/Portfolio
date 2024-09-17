@@ -40,8 +40,6 @@ const BaseButton = styled("button", {
   },
 
   "&:hover": {
-    cursor: "pointer",
-
     span: {
       backgroundColor: "$fontPrimary",
     },

@@ -55,7 +55,6 @@ const BaseButton = styled("button", {
 
   "&:hover": {
     color: "$fontPrimaryHover",
-    cursor: "pointer",
   },
 
   "@bp2": {

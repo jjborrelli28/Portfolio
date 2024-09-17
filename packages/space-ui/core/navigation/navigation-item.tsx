@@ -1,7 +1,8 @@
 import { fadeAnimation, primaryUnderlineAnimation } from "@space-ui/animations";
 import { styled } from "@space-ui/config";
-import { Icon, TextLink } from "@space-ui/core";
+import { Icon } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
+import { Link as ScrollLink } from "react-scroll";
 
 export const NavigationItem = ({ item }: NavigationItemProps) => {
   const { text, url, reference } = item.fields;
@@ -15,12 +16,16 @@ export const NavigationItem = ({ item }: NavigationItemProps) => {
       })}
     >
       <ItemContainer className={primaryUnderlineAnimation}>
-        <TextLink href={url} ariaLabel={text}>
-          <>
-            <Icon type={reference} />
-            &nbsp;{text}
-          </>
-        </TextLink>
+        <ScrollLink
+          to={url}
+          aria-label={text}
+          smooth={true}
+          duration={300}
+          offset={-70}
+        >
+          <Icon type={reference} />
+          &nbsp;{text}
+        </ScrollLink>
       </ItemContainer>
     </ItemList>
   );
@@ -52,7 +57,7 @@ const ItemContainer = styled("div", {
     display: "flex",
     alignItems: "center",
     w: "fit-content",
-    transition: "color ease-in 0.3s ",
+    transition: "color 0.3s ",
 
     "&:hover": {
       color: "$fontPrimaryHover",

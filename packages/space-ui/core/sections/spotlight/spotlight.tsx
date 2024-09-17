@@ -87,7 +87,7 @@ export const SpotlightPrimaryContainer = styled("div", {
   gridTemplateAreas: "'text' 'asset'",
   gridTemplateRows: "1fr 1fr",
   gridTemplateColumns: "1fr",
-  gap: "2rem",
+  gap: "$5",
 
   "@bp2": {
     h: "50vh",
@@ -128,7 +128,6 @@ const contentContainerStyles = css({
 
 const reverseContentContainerStyles = css({
   gridArea: "text",
-  pl: "1rem",
 
   "@bp2": {
     pl: "4rem",

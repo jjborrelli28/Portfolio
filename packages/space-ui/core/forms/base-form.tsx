@@ -6,6 +6,6 @@ export const BaseForm = styled("form", {
   gap: "1.6rem",
 
   "@bp2": {
-    gap: "2rem",
+    gap: "$5",
   },
 });

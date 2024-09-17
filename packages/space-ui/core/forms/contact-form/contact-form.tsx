@@ -14,6 +14,7 @@ import { useReducer, useRef } from "react";
 import { constants } from "../constants";
 import { changeValues, changeAlert } from "./management/actions";
 import { initialState, reducer } from "./management/reducer";
+import { useRouter } from "next/router";
 
 export const ContactForm = ({
   serviceId,
@@ -22,6 +23,7 @@ export const ContactForm = ({
   className,
   css,
 }: ContactFormProps) => {
+  const { locale } = useRouter();
   const [{ values, alert }, dispatch]: any = useReducer<any>(
     reducer,
     initialState
@@ -120,7 +122,7 @@ export const ContactForm = ({
           type="text"
           id="fullName"
           name="fullName"
-          label="Full Name"
+          label={locale === "es" ? "Nombre y Apellido:" : "Full Name:"}
           value={fullName}
           onChange={({ target }: any) => dispatch(changeValues(target))}
           minLength={3}
@@ -134,7 +136,7 @@ export const ContactForm = ({
           type="email"
           id="email"
           name="email"
-          label="Email"
+          label="Email:"
           value={email}
           onChange={({ target }: any) => dispatch(changeValues(target))}
           pattern={constants.patterns.email}
@@ -145,7 +147,7 @@ export const ContactForm = ({
         <InputTextArea
           id="message"
           name="message"
-          label="Message"
+          label={locale === "es" ? "Mensaje:" : "Message:"}
           value={message}
           onChange={({ target }: any) => dispatch(changeValues(target))}
           minLength={14}
@@ -154,15 +156,8 @@ export const ContactForm = ({
           disabled={alert.loading || alert.load || false}
           required
         />
-        <Button
-          type="submit"
-          size="md"
-          loading={alert.loading}
-          onSubmit={(e: any) => {
-            sendEmail(e);
-          }}
-        >
-          Send&nbsp;
+        <Button type="submit" size="md" loading={alert.loading}>
+          {locale === "es" ? "Enviar" : "Send"}&nbsp;
           <Icon type="send" />
         </Button>
       </BaseForm>

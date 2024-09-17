@@ -12,8 +12,8 @@ import {
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
-import Link from "next/link";
 import { useInView } from "react-intersection-observer";
+import { Link as ScrollLink } from "react-scroll";
 
 export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
   const {
@@ -68,17 +68,18 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
         })}
         css={{ maxw: "500px" }}
       />
-      <Link href={arrowDownLink}>
-        <a aria-label="Arrow scroll indicator">
-          <Icon
-            type="arrow-down"
-            className={clsx(
-              arrowStyles(inView),
-              bounceAnimation({ time: 2000 })
-            )}
-          />
-        </a>
-      </Link>
+      <ScrollLink
+        to={arrowDownLink}
+        aria-label="Arrow scroll indicator"
+        smooth={true}
+        duration={300}
+        offset={-70}
+      >
+        <Icon
+          type="arrow-down"
+          className={clsx(arrowStyles(inView), bounceAnimation({ time: 2000 }))}
+        />
+      </ScrollLink>
     </BaseSection>
   );
 };
@@ -90,7 +91,7 @@ const arrowStyles = (inView: boolean) => {
     position: "absolute",
     bottom: "$4",
     left: "calc(50% - 30px)",
-    transition: "color ease 0.3s",
+    transition: "color ease-in 0.3s",
 
     "@bp2": {
       bottom: "$8",

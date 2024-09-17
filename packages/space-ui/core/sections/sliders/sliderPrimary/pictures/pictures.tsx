@@ -61,7 +61,6 @@ const PicturesRow = styled("div", {
 
 const picturesStyles = css({
   transition: "filter 0.3s ease-in",
-  cursor: "pointer",
 
   "&:hover": {
     filter: "brightness(1.25)",

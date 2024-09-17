@@ -23,7 +23,7 @@ export const BaseSection = forwardRef(
           className={clsx(
             classCreator({
               py: "$8",
-              px: size === "full" ? "$0" : "$8",
+              px: size === "full" ? "$0" : "$5",
 
               "@bp2": {
                 py: "$17",

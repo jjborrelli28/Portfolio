@@ -28,7 +28,7 @@ export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
 
   return (
     <BaseSection id={sectionName} size="full" backgroundColor={backgroundColor}>
-      <Container size={size} css={{ px: "2rem" }}>
+      <Container size={size} css={{ px: "$5" }}>
         <RichText
           ref={ref}
           content={headline}
@@ -62,7 +62,7 @@ const SliderContainer = styled("div", {
   justifyContent: "center",
   alignItems: "center",
   overflow: "hidden",
-  my: "2rem",
+  my: "$5",
   h: "80px",
 
   "@bp2": { h: "130px" },
