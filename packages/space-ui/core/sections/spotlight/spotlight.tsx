@@ -13,7 +13,7 @@ import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
 import { useInView } from "react-intersection-observer";
 
-export const Spotlight = ({ section }: SpotlightProps) => {
+export const Spotlight = ({ section, isLastSpotlight }: SpotlightProps) => {
   const {
     sectionName,
     size,
@@ -35,6 +35,7 @@ export const Spotlight = ({ section }: SpotlightProps) => {
       ref={ref}
       size={size}
       backgroundColor={backgroundColor}
+      isLastSpotlight={isLastSpotlight}
     >
       <SpotlightPrimaryContainer mode={reverse ? "reverse" : "normal"}>
         <RichText
@@ -62,13 +63,6 @@ export const Spotlight = ({ section }: SpotlightProps) => {
 };
 
 const SpotlightContainer = styled("div", {
-  pb: "4rem",
-
-  "@bp2": {
-    pt: "4rem",
-    pb: "8rem",
-  },
-
   variants: {
     backgroundColor: {
       primary: {
@@ -78,6 +72,22 @@ const SpotlightContainer = styled("div", {
         backgroundColor: "$bgSecondary",
       },
     },
+    isLastSpotlight: {
+      true: {
+        pb: "0",
+        "@bp2": {
+          pt: "3rem",
+          pb: "6rem",
+        },
+      },
+      false: {
+        pb: "3rem",
+        "@bp2": {
+          pt: "3rem",
+          pb: "6rem",
+        },
+      },
+    },
   },
 });
 
@@ -85,7 +95,7 @@ export const SpotlightPrimaryContainer = styled("div", {
   position: "relative",
   display: "grid",
   gridTemplateAreas: "'text' 'asset'",
-  gridTemplateRows: "1fr 1fr",
+  gridTemplateRows: "auto auto",
   gridTemplateColumns: "1fr",
   gap: "$5",
 
@@ -122,7 +132,7 @@ const contentContainerStyles = css({
   },
 
   "@bp3": {
-    pr: "8rem",
+    pr: "6rem",
   },
 }).toString();
 
@@ -134,7 +144,7 @@ const reverseContentContainerStyles = css({
   },
 
   "@bp3": {
-    pl: "8rem",
+    pl: "6rem",
   },
 }).toString();
 
@@ -145,6 +155,7 @@ const assetStyles = css({
 
 export type SpotlightProps = {
   section: SportlightFieldsProps;
+  isLastSpotlight: boolean;
 };
 
 export type SportlightFieldsProps = {

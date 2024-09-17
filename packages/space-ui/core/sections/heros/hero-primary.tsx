@@ -37,8 +37,8 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
       css={{
         position: "relative",
         display: "grid",
-        gridTemplateRows: "2fr 3fr",
         gridTemplateColumns: "1fr",
+        gridTemplateRows: "1fr 1fr",
         h: "100vh",
         pt: "$headerMobile",
 
@@ -60,8 +60,9 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
       />
       <Asset
         asset={asset}
-        sizes="50vw"
         priority
+        layout="fill"
+        objectFit="contain"
         assetClassName={fadeAnimation({
           type: inView ? "inRight" : "out",
           time: 1000,
@@ -92,6 +93,7 @@ const arrowStyles = (inView: boolean) => {
     bottom: "$4",
     left: "calc(50% - 30px)",
     transition: "color ease-in 0.3s",
+    zIndex: 10,
 
     "@bp2": {
       bottom: "$8",

@@ -2,16 +2,20 @@ import { Document } from "@contentful/rich-text-types";
 import { fadeAnimation } from "@space-ui/animations";
 import { css, styled } from "@space-ui/config";
 import {
+  Asset,
   BackgroundColorBaseSectionProps,
   BaseSection,
   Container,
   ContainerProps,
   ImageProps,
-  Pictures,
   RichText,
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
+import AutoScroll from "embla-carousel-auto-scroll";
+import useEmblaCarousel from "embla-carousel-react";
+import Link from "next/link";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
@@ -25,6 +29,23 @@ export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
   } = section.fields;
 
   const { ref, inView } = useInView();
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      dragFree: true,
+    },
+    [AutoScroll({ stopOnMouseEnter: true, stopOnInteraction: false })]
+  );
+
+  useEffect(() => {
+    const autoScroll = emblaApi?.plugins()?.autoScroll;
+
+    if (!autoScroll) return;
+
+    autoScroll.isPlaying();
+  }, [emblaApi]);
 
   return (
     <BaseSection id={sectionName} size="full" backgroundColor={backgroundColor}>
@@ -47,26 +68,54 @@ export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
           css={customHeadlineStyles}
         />
       </Container>
-      <SliderContainer>
-        <Pictures pictures={pictures} sliderType="primary" inView={inView} />
-        <Pictures pictures={pictures} sliderType="secondary" inView={inView} />
-      </SliderContainer>
+      <Embla>
+        <EmblaViewport ref={emblaRef}>
+          <EmblaContainer>
+            {pictures.map((picture, i) => (
+              <Link key={i} href={picture.fields?.link || "#"} className="">
+                <Asset
+                  asset={picture}
+                  className={clsx(
+                    emblaSlider,
+                    fadeAnimation({
+                      type: inView ? "in" : "out",
+                      time: 1000,
+                    })
+                  )}
+                />
+              </Link>
+            ))}
+          </EmblaContainer>
+        </EmblaViewport>
+      </Embla>
     </BaseSection>
   );
 };
 
-const SliderContainer = styled("div", {
-  position: "relative",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  overflow: "hidden",
-  my: "$5",
-  h: "80px",
-
-  "@bp2": { h: "130px" },
+const Embla = styled("div", {
+  h: "14rem",
 });
+
+const EmblaViewport = styled("div", {
+  overflow: "hidden",
+});
+
+const EmblaContainer = styled("div", {
+  display: "flex",
+  touchAction: "pan-y pinch-zoom",
+});
+
+const emblaSlider = css({
+  flex: "0 0 14rem",
+  minWidth: 0,
+  p: "3.5rem",
+  transform: "translate3d(0, 0, 0)",
+  transition: "filter 0.3s",
+
+  "&:hover": {
+    filter: "brightness(1.25)",
+  },
+}).toString();
 
 export type SliderPrimaryProps = {
   section: {

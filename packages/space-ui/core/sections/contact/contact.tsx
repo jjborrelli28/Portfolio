@@ -39,7 +39,12 @@ export const Contact = ({ section }: ContactProps) => {
       <RichText
         content={content}
         className={clsx(
-          css({ color: "$fontSecondary" }).toString(),
+          css({
+            color: "$fontSecondary",
+            h2: {
+              mb: "3rem",
+            },
+          }).toString(),
           fadeAnimation({
             type: headlineInView ? "inLeft" : "out",
             time: 1000,
@@ -53,8 +58,7 @@ export const Contact = ({ section }: ContactProps) => {
           templateId={templateId}
           publicKey={publicKey}
           css={{
-            mb: "3rem",
-            "@bp2": { mb: "0", pb: "3rem", justifyContent: "center" },
+            "@bp2": { pb: "3rem", justifyContent: "center" },
           }}
         />
         <Asset

@@ -100,7 +100,7 @@ export const BaseButton = styled("button", {
         },
       },
       lg: {
-        w: "8rem",
+        w: "6rem",
 
         "@bp2": {
           w: "10rem",

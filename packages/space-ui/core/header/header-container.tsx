@@ -30,13 +30,13 @@ export const HeaderContainer = ({
             classCreator({
               display: "flex",
               flexDirection: "column",
-              gap: "$5",
               p: "$5",
               transition: "all 0.3s",
               justifyContent: "space-between",
-
+              
               "@bp2": {
                 flexDirection: "row",
+                gap: "$5",
        
               },
             }).toString(),

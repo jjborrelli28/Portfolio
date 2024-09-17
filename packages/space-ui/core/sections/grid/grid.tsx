@@ -89,7 +89,6 @@ const CardContainer = styled("div", {
   display: "grid",
   gridTemplateColumns: "1fr",
   gap: "$5",
-  py: "3rem",
 
   "@bp2": {
     gridTemplateColumns: "repeat(2,minmax(0,1fr))",

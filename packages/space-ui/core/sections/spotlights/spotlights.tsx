@@ -45,7 +45,11 @@ export const Spotlights = ({ section }: SpotlightsProps) => {
         css={customHeadlineStyles}
       />
       {spotlights?.map((spotlight, index) => (
-        <Spotlight key={index} section={spotlight} />
+        <Spotlight
+          key={index}
+          section={spotlight}
+          isLastSpotlight={index === spotlights.length - 1}
+        />
       ))}
     </BaseSection>
   );
