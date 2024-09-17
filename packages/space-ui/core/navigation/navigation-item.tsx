@@ -58,6 +58,7 @@ const ItemContainer = styled("div", {
     alignItems: "center",
     w: "fit-content",
     transition: "color 0.3s ",
+    cursor: "default",
 
     "&:hover": {
       color: "$fontPrimaryHover",

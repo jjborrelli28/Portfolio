@@ -175,9 +175,9 @@ export const CardContent = ({
                       <Asset
                         key={index}
                         asset={entry.data.target}
-                        layout="responsive"
-                        sizes="5vw"
                         className={css({
+                          display: "flex",
+                          alignItems: "center",
                           m: "0",
                           w: "20px",
                           "@bp2": {

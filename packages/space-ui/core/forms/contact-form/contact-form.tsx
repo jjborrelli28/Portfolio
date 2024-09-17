@@ -10,11 +10,12 @@ import {
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
-import { useReducer, useRef } from "react";
-import { constants } from "../constants";
-import { changeValues, changeAlert } from "./management/actions";
-import { initialState, reducer } from "./management/reducer";
 import { useRouter } from "next/router";
+import { useReducer, useRef } from "react";
+import ConfettiExplosion from "react-confetti-explosion";
+import { constants } from "../constants";
+import { changeAlert, changeValues } from "./management/actions";
+import { initialState, reducer } from "./management/reducer";
 
 export const ContactForm = ({
   serviceId,
@@ -72,7 +73,7 @@ export const ContactForm = ({
                 loading: false,
                 load: true,
                 type: "success",
-                message: "Your message was sent",
+                message: "Your message was sent!",
               })
             );
           }, 1000);
@@ -159,6 +160,16 @@ export const ContactForm = ({
         <Button type="submit" size="md" loading={alert.loading}>
           {locale === "es" ? "Enviar" : "Send"}&nbsp;
           <Icon type="send" />
+          {alert.type === "success" && (
+            <ConfettiExplosion
+              {...{
+                force: 0.8,
+                duration: 3000,
+                particleCount: 250,
+                width: 1600,
+              }}
+            />
+          )}
         </Button>
       </BaseForm>
 
@@ -182,9 +193,8 @@ export const ContactForm = ({
   );
 };
 
-const Alert = styled("h3", {
+const Alert = styled("p", {
   color: "$fontPrimary",
-  fontSize: "$14",
   position: "absolute",
   top: "0",
   left: "0",
@@ -197,13 +207,20 @@ const Alert = styled("h3", {
   variants: {
     type: {
       success: {
+        fontWeight: "$4",
+        fontSize: "$8",
         color: "$success",
+
+        "@bp2": {
+          fontSize: "$13",
+        },
       },
       warning: {
         color: "$warning",
       },
       error: {
         color: "$error",
+        fontSize: "$8",
       },
       info: {
         color: "$info",
