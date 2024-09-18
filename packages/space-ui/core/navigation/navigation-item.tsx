@@ -18,6 +18,7 @@ export const NavigationItem = ({ item }: NavigationItemProps) => {
       <ItemContainer className={primaryUnderlineAnimation}>
         <ScrollLink
           to={url}
+          href="#"
           aria-label={text}
           smooth={true}
           duration={300}

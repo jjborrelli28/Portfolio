@@ -39,6 +39,7 @@ export const Header = ({ header, className, css }: HeaderProps) => {
       {logo ? (
         <ScrollLink
           to={logo.fields.link as string}
+          href="#"
           smooth={true}
           duration={300}
         >
@@ -51,6 +52,7 @@ export const Header = ({ header, className, css }: HeaderProps) => {
               position: "absolute !important",
               top: "$5",
               right: "$5",
+              cursor: "default",
 
               "@bp2": {
                 position: "relative !important",

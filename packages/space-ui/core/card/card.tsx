@@ -155,8 +155,8 @@ export const CardContent = ({
                       <Card.Link
                         key={index}
                         href={entry.data.target.fields.url}
+                        ariaLabel={`Go to ${entry.data.target.fields.title}'s page`}
                         target="_blank"
-                        ariaLabel={entry.data.target.fields.text}
                       >
                         <Icon
                           type={entry.data.target.fields.reference}

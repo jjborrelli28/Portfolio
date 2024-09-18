@@ -56,7 +56,7 @@ export const LanguageSwitcher = ({
           },
         }}
       >
-        <Asset asset={languageFlag} className="" />
+        <Asset asset={languageFlag} />
       </FlagButton>
       <DropdownMenuContainer>
         <DropdownMenu open={isOpen}>

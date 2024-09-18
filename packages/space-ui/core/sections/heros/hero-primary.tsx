@@ -71,15 +71,14 @@ export const HeroPrimary = ({ section }: HeroPrimaryProps) => {
       />
       <ScrollLink
         to={arrowDownLink}
-        aria-label="Arrow scroll indicator"
+        href="#"
+        aria-label="Go to About Me section"
         smooth={true}
         duration={300}
         offset={-70}
+        className={clsx(arrowStyles(inView), bounceAnimation({ time: 2000 }))}
       >
-        <Icon
-          type="arrow-down"
-          className={clsx(arrowStyles(inView), bounceAnimation({ time: 2000 }))}
-        />
+        <Icon type="arrow-down" />
       </ScrollLink>
     </BaseSection>
   );
@@ -94,6 +93,7 @@ const arrowStyles = (inView: boolean) => {
     left: "calc(50% - 30px)",
     transition: "color ease-in 0.3s",
     zIndex: 10,
+    cursor: "default",
 
     "@bp2": {
       bottom: "$8",
