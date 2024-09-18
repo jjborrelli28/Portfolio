@@ -19,15 +19,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
-  const {
-    sectionName,
-    size,
-    backgroundColor,
-    headline,
-    customHeadlineStyles,
-    pictures,
-  } = section.fields;
-
   const { ref, inView } = useInView();
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -46,6 +37,15 @@ export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
 
     autoScroll.isPlaying();
   }, [emblaApi]);
+
+  const {
+    sectionName,
+    size,
+    backgroundColor,
+    headline,
+    customHeadlineStyles,
+    pictures,
+  } = section.fields;
 
   return (
     <BaseSection id={sectionName} size="full" backgroundColor={backgroundColor}>

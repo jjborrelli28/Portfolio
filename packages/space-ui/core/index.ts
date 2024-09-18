@@ -34,7 +34,7 @@ export * from "./sections/grid/grid";
 export * from "./sections/heros/hero-primary";
 export * from "./sections/heros/hero-types";
 export * from "./sections/known-sections";
-export * from "./sections/sliders/sliderPrimary/sliderPrimary";
+export * from "./sections/sliders/sliderPrimary";
 export * from "./sections/sliders/slider-types";
 export * from "./sections/spotlight/spotlight";
 export * from "./sections/spotlights/spotlights";
