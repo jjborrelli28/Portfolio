@@ -2,8 +2,9 @@ import { Document } from "@contentful/rich-text-types";
 import { css, styled } from "@space-ui/config";
 import { Image, ImageProps } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
+import clsx from "clsx";
 import Link from "next/link";
-import { ReactNode, PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import { Asset } from "../asset/asset";
 import { Icon } from "../icons/icon";
 import { Paragraph } from "../rich-text/html-components";
@@ -40,7 +41,10 @@ export const CardLink = ({
 }: PropsWithChildren<CardLinkProps>) => {
   return (
     <Link href={href} target={target}>
-      <a aria-label={ariaLabel} className={className}>
+      <a
+        aria-label={ariaLabel}
+        className={clsx(css({ cursor: "default" }).toString(), className)}
+      >
         {children}
       </a>
     </Link>
@@ -124,7 +128,8 @@ export const CardContent = ({
         customContentStyles || {
           p: "1.2rem",
           h: "100%",
-          justifyContent: "space-between",
+          flex: 1,
+          justifyContent: "start",
           gap: "0.64rem",
 
           "@bp2": {
@@ -145,8 +150,20 @@ export const CardContent = ({
               (c) => c.nodeType === "embedded-entry-inline"
             );
 
+            const isLastRow = embbedEntries.find(
+              (entries) => entries.data.target.fields?.reference === "github"
+            );
+
             return (
-              <EntryInlineContainer>
+              <EntryInlineContainer
+                css={
+                  isLastRow && {
+                    flex: 1,
+                    alignItems: "end",
+                    "&: a": { height: "fit-content" },
+                  }
+                }
+              >
                 {embbedEntries.map((entry, index) => {
                   const entryType = entry.data.target.sys.contentType.sys.id;
 

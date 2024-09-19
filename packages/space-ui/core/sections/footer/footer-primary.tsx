@@ -65,7 +65,6 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
           <p
             className={css({
               fontSize: "$4",
-              fontStyle: "italic",
               mt: "2.5rem",
               mb: "0",
 

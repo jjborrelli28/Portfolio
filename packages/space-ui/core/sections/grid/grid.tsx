@@ -213,6 +213,7 @@ const EmblaContainer = styled("div", {
 });
 
 const EmblaSlider = styled("div", {
+  display: "flex",
   flex: "0 0 100%",
   minWidth: 0,
   p: "$8",
