@@ -7,6 +7,9 @@ class PortfolioDocument extends Document<any> {
     return (
       <Html lang="en">
         <Head>
+          <meta property="og:image" content="/favicon.ico" />
+          <meta property="og:url" content="https://juanjoseborrelli.com" />
+          <meta property="og:type" content="website" />
           <link
             rel="preload"
             href="/fonts/Raleway-Light.ttf"
