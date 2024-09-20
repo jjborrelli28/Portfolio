@@ -11,6 +11,9 @@ export const KNOWN_SECTIONS: Record<string, React.ComponentType<any>> = {
   ["heroPrimary"]: dynamic(() =>
     import("./heros/hero-primary").then((mod) => mod.HeroPrimary)
   ),
+  ["heroResume"]: dynamic(() =>
+    import("./heros/hero-resume").then((mod) => mod.HeroResume)
+  ),
   ["sliderPrimary"]: dynamic(() =>
     import("./sliders/sliderPrimary").then((mod) => mod.SliderPrimary)
   ),

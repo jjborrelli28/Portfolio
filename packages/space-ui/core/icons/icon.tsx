@@ -1,8 +1,3 @@
-import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
-import { CgWebsite } from "react-icons/cg";
-import { IoIosArrowDown } from "react-icons/io";
-import { RiMailSendLine } from "react-icons/ri";
-import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import {
   AiOutlineCheckCircle,
   AiOutlineCloseCircle,
@@ -14,10 +9,20 @@ import {
   AiOutlineUser,
   AiOutlineWarning,
 } from "react-icons/ai";
+import { CgWebsite } from "react-icons/cg";
+import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { RiMailSendLine } from "react-icons/ri";
+import { TbFile } from "react-icons/tb";
 
 export const Icon = ({ type, className }: TypeProps) => {
-  if (type === "home") {
+  if (type === "homepage") {
     return <AiOutlineHome className={className} />;
+  }
+
+  if (type === "resume") {
+    return <TbFile className={className} />;
   }
 
   if (type === "about") {
