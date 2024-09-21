@@ -203,7 +203,11 @@ const ResumeContainer = styled("div", {
   gap: "7.5mm",
   mt: "$11",
   mx: "auto",
-  overflowX: "auto",
+  overflowX: "scroll",
+
+  "@bp2": {
+    overflowX: "visible",
+  },
 });
 
 const Resume = styled("div", {
