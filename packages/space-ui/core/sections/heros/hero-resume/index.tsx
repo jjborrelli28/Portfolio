@@ -11,45 +11,21 @@ import {
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
 import clsx from "clsx";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { FaFileDownload } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
-import { ResumeColumn } from "./resume-column";
 import { ContactFooter } from "./contact-footer";
+import { ResumeColumn } from "./resume-column";
 
 export const HeroResume = ({ section }: HeroResumeProps) => {
   const { ref, inView } = useInView({
     initialInView: true,
   });
   const resumeRef = useRef<HTMLDivElement | null>(null);
-
   const { locale } = useRouter();
-
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const handleDownloadResume = useCallback(() => {
-    const resume = resumeRef.current;
-
-    if (!resume) return;
-
-    // html2pdf()
-    //   .from(resume)
-    //   .set({
-    //     filename: locale?.startsWith("es")
-    //       ? "juanjoseborrelli-cv.pdf"
-    //       : "juanjoseborrelli-resume.pdf",
-    //     image: { type: "png", quality: 0.98 },
-    //     html2canvas: { scale: 2, useCORS: true },
-    //   })
-    //   .save();
-  }, [resumeRef]);
-
-  if (!isMounted) return null;
 
   const {
     sectionName,
@@ -63,6 +39,38 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
     customContentStyles,
   } = section.fields;
 
+  const handleDownloadResume = async () => {
+    if (resumeRef.current) {
+      const element = resumeRef.current;
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+
+      let position = 0;
+
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save("resume.pdf");
+    }
+  };
+
   return (
     <BaseSection
       id={sectionName}
@@ -71,7 +79,6 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
       css={{
         minh: "100vh",
         pt: "$headerMobile",
-
         "@bp2": {
           pt: "134px",
         },
@@ -143,7 +150,7 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
         </Resume>
 
         <Button size="lg" onClick={handleDownloadResume}>
-          {locale?.startsWith("es") ? "Descargar" : "Dorwnload"}&nbsp;
+          {locale?.startsWith("es") ? "Descargar" : "Download"}&nbsp;
           <FaFileDownload />
         </Button>
       </ResumeContainer>
