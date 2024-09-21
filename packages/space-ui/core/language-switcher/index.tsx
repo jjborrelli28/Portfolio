@@ -56,7 +56,13 @@ export const LanguageSwitcher = ({
           },
         }}
       >
-        <Asset asset={languageFlag} />
+        <Asset
+          asset={languageFlag}
+          className={css({
+            width: "30px !important",
+            display: "flex",
+          }).toString()}
+        />
       </FlagButton>
       <DropdownMenuContainer>
         <DropdownMenu open={isOpen}>
@@ -78,7 +84,7 @@ export const LanguageSwitcher = ({
               >
                 <Asset
                   asset={languageFlag}
-                  className={css({ width: "25px !important" }).toString()}
+                  className={css({ width: "30px !important" }).toString()}
                 />
                 <p className={css({ m: "0" }).toString()}>
                   {languageFlag.fields.light.fields.description}
@@ -99,7 +105,7 @@ const DropdownContainer = styled("div", {
 });
 
 const FlagButton = styled("button", {
-  width: "25px",
+  width: "30px",
   backgroundColor: "transparent",
   p: "0",
   border: "none",

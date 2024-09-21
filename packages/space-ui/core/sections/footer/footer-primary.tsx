@@ -48,9 +48,12 @@ export const FooterPrimary = ({ section }: FooterPrimaryProps) => {
         <CopyrightContainer>
           <RichText
             content={copyright}
-            className={css({
-              color: "$fontTertiary",
-            }).toString()}
+            blockClass={{
+              paragraph: css({
+                color: "$fontTertiary",
+                my: "0 !important",
+              }).toString(),
+            }}
             css={customCopyrightStyles}
           />
           {new Date().getFullYear()}

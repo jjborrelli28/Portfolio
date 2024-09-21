@@ -175,7 +175,7 @@ const GridCard = ({
       css={{
         borderRadius: "2px",
         backgroundColor: "$bgCard",
-        boxShadow: "0px 0px 8px 8px rgba(0,0,0,0.2)",
+        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
       }}
       className={className}
     >

@@ -189,19 +189,23 @@ export const CardContent = ({
 
                   if (entryType === "image")
                     return (
-                      <Asset
+                      <Link
                         key={index}
-                        asset={entry.data.target}
-                        className={css({
-                          display: "flex",
-                          alignItems: "center",
-                          m: "0",
-                          w: "20px",
-                          "@bp2": {
-                            w: "25px",
-                          },
-                        }).toString()}
-                      />
+                        href={entry.data.target.fields?.link || "#"}
+                      >
+                        <Asset
+                          asset={entry.data.target}
+                          className={css({
+                            display: "flex",
+                            alignItems: "center",
+                            m: "0",
+                            w: "20px",
+                            "@bp2": {
+                              w: "25px",
+                            },
+                          }).toString()}
+                        />
+                      </Link>
                     );
                 })}
               </EntryInlineContainer>
@@ -241,7 +245,7 @@ export const CardContent = ({
   );
 };
 
-const EntryInlineContainer = styled("div", {
+export const EntryInlineContainer = styled("div", {
   display: "flex",
   gap: "8px",
 

@@ -1,6 +1,9 @@
-import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
+import type * as Stitches from "@stitches/react";
 import { ForwardedRef, forwardRef, useMemo } from "react";
+import { useInView } from "react-intersection-observer";
+import { RichTextContainer } from "./rich-text-container";
 import {
   BlockClass,
   InlineClass,
@@ -12,9 +15,6 @@ import {
   createDefaultBlockRenderers,
   createDefaultInlineRenderers,
 } from "./rich-text-utils";
-import { RichTextContainer } from "./rich-text-container";
-import type * as Stitches from "@stitches/react";
-import { useInView } from "react-intersection-observer";
 
 export interface RichTextProps {
   content?: Document;
@@ -24,6 +24,7 @@ export interface RichTextProps {
   blockClass?: BlockClass;
   inlineClass?: InlineClass;
   markClass?: RenderMarkClass;
+  activeUnderlines?: boolean;
 }
 
 export const RichText = forwardRef(
@@ -36,6 +37,7 @@ export const RichText = forwardRef(
       blockClass = {},
       inlineClass = {},
       markClass = {},
+      activeUnderlines = false,
     }: RichTextProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
@@ -47,7 +49,11 @@ export const RichText = forwardRef(
 
     const defaultBlockRenderers = useMemo(
       () =>
-        createDefaultBlockRenderers(blockClass, underlineRef, underlineInView),
+        createDefaultBlockRenderers(
+          blockClass,
+          underlineRef,
+          activeUnderlines || underlineInView
+        ),
       [blockClass]
     );
 

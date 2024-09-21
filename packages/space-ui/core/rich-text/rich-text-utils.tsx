@@ -1,8 +1,8 @@
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { secondaryUnderlineAnimation } from "@space-ui/animations";
+import { css } from "@space-ui/config";
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { useInView } from "react-intersection-observer";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import {
   Heading1,
@@ -20,7 +20,6 @@ import {
   RenderMarkClass,
   RenderMarksType,
 } from "./rich-text-types";
-import { css } from "@space-ui/config";
 
 const parseContents = (
   contents: any,

@@ -72,7 +72,7 @@ export const SliderPrimary = ({ section }: SliderPrimaryProps) => {
         <EmblaViewport ref={emblaRef}>
           <EmblaContainer>
             {pictures.map((picture, i) => (
-              <Link key={i} href={picture.fields?.link || "#"} className="">
+              <Link key={i} href={picture.fields?.link || "#"}>
                 <Asset
                   asset={picture}
                   className={clsx(

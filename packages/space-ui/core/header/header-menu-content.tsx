@@ -5,7 +5,7 @@ export const HeaderMenuContent = styled("div", {
   display: "flex",
   flexDirection: "column",
   gap: "$5",
-  
+
   "@bp2": {
     flexDirection: "row",
     alignItems: "center",
