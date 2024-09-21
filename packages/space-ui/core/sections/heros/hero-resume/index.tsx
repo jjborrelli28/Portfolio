@@ -2,6 +2,7 @@ import { Document } from "@contentful/rich-text-types";
 import { fadeAnimation } from "@space-ui/animations";
 import { css, styled } from "@space-ui/config";
 import {
+  Asset,
   BackgroundColorBaseSectionProps,
   BaseSection,
   Button,
@@ -134,6 +135,19 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                 ),
               }}
             />
+            <Asset
+              asset={asset}
+              className={css({
+                position: "absolute !important",
+                top: "7.5mm",
+                right: "10mm",
+                w: "42mm",
+                borderRadius: "50%",
+                b: "solid $fontSecondary 1mm",
+                overflow: "hidden",
+              }).toString()}
+              assetClassName={css({}).toString()}
+            />
             <ResumeColumns>
               <ResumeColumn content={firstColumn} />
               <ResumeColumn
@@ -149,22 +163,19 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
           </ResumeContent>
         </Resume>
 
-        <Button size="lg" onClick={handleDownloadResume}>
-          {locale?.startsWith("es") ? "Descargar" : "Download"}&nbsp;
-          <FaFileDownload />
-        </Button>
+        <div
+          className={css({
+            display: "flex",
+            justifyContent: "end",
+            mb: "7.5mm",
+          }).toString()}
+        >
+          <Button size="lg" onClick={handleDownloadResume}>
+            {locale?.startsWith("es") ? "Descargar" : "Download"}&nbsp;
+            <FaFileDownload />
+          </Button>
+        </div>
       </ResumeContainer>
-      {/* <Asset
-        asset={asset}
-        priority
-        layout="fill"
-        objectFit="contain"
-        assetClassName={fadeAnimation({
-          type: inView ? "inRight" : "out",
-          time: 1000,
-        })}
-        css={{ maxw: "500px" }}
-      /> */}
     </BaseSection>
   );
 };
@@ -192,12 +203,12 @@ const ResumeContainer = styled("div", {
   gap: "7.5mm",
   mt: "$11",
   mx: "auto",
-  alignItems: "end",
+  overflowX: "auto",
 });
 
 const Resume = styled("div", {
   h: "297mm",
-  maxw: "210mm",
+  w: "210mm",
   backgroundColor: "#fff",
   display: "flex",
   p: "7.5mm",
@@ -211,6 +222,7 @@ const ResumeContent = styled("div", {
   gap: "7.5mm",
   b: "solid $fontSecondary 1mm",
   p: "7.5mm",
+  position: "relative",
 });
 
 const ResumeColumns = styled("div", {
