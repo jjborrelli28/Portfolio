@@ -134,7 +134,7 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                   </p>
                 ),
               }}
-            />{" "}
+            />
             <img
               src={asset.fields.light.fields.file.url}
               className={css({
@@ -145,6 +145,8 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                 borderRadius: "50%",
                 b: "solid $fontSecondary 1mm",
                 overflow: "hidden",
+                backgroundColor: "$bgPrimary",
+                radialGradient: "$bgGradientPrimary",
               }).toString()}
             />
             <ResumeColumns>
