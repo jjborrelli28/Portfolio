@@ -141,7 +141,7 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                 position: "absolute !important",
                 top: "7.5mm",
                 right: "10mm",
-                w: "42mm",
+                maxw: "42mm",
                 borderRadius: "50%",
                 b: "solid $fontSecondary 1mm",
                 overflow: "hidden",
