@@ -147,20 +147,6 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                 overflow: "hidden",
               }).toString()}
             />
-            <Asset
-              asset={asset}
-              className={css({
-                position: "absolute !important",
-                top: "7.5mm !important",
-                right: "10mm !important",
-                maxw: "42mm !important",
-                w: "42mm !important",
-                borderRadius: "50%",
-                b: "solid $fontSecondary 1mm",
-                overflow: "hidden",
-              }).toString()}
-              assetClassName={css({}).toString()}
-            />
             <ResumeColumns>
               <ResumeColumn content={firstColumn} />
               <ResumeColumn
