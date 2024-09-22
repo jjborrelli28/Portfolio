@@ -135,7 +135,7 @@ export const ResumeColumn = ({
                               }
                               className={styles({
                                 my: "0.9375mm",
-                                w: "7.5mm",
+                                w: "6mm",
                               }).toString()}
                             />
                           )}
@@ -166,7 +166,7 @@ export const ResumeColumn = ({
                               }
                               className={styles({
                                 my: "0.9375mm",
-                                w: "7.5mm",
+                                w: "6mm",
                               }).toString()}
                             />
                           )}
