@@ -57,9 +57,9 @@ export const ResumeColumn = ({
               left: "0",
               top: "50%",
               transform: "translateY(-50%)",
-              borderTop: "2mm solid transparent",
-              borderBottom: "1.75mm solid transparent",
-              borderLeft: "2.5mm solid $line",
+              bt: "1mm solid transparent",
+              bb: "1mm solid transparent",
+              bl: "2mm solid $line",
             },
 
             "& p": {
@@ -202,4 +202,5 @@ export const ResumeColumn = ({
 const ResumeColumnContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
+  h: "fit-content",
 });

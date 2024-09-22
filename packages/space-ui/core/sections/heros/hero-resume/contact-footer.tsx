@@ -83,10 +83,10 @@ const ContactItem = ({
       display: "flex",
       alignItems: "center",
       gap: "1mm",
-      color: "$fontSecondary",
+      color: "#fff",
       my: "0 !important",
       "& a": {
-        color: "$fontSecondary",
+        color: "#fff",
         fontWeight: "$4",
         fontSize: "$4",
         textDecoration: "none",
@@ -100,8 +100,9 @@ const ContactItem = ({
 
 const ContactFooterContainer = styled("div", {
   gridColumn: "1 / -1",
-  pt: "7.5mm",
+  p: "3.75mm",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
-  borderTop: "solid $fontSecondary 1mm",
+
+  backgroundColor: "$fontSecondary",
 });

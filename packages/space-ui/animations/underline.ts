@@ -46,11 +46,12 @@ export const secondaryUnderlineAnimation = ({
       transitionDelay: "0.5s",
       transformOrigin: "bottom left",
       pointerEvents: "none",
+      zIndex: "-1",
     },
 
     "&:before": {
-      bottom: "-0.2rem",
-      bb: "0.3rem solid $line",
+      bottom: "0rem",
+      bb: "0.2rem solid $line",
       transform: active ? "scaleX(1) !important" : "",
     },
   }).toString();

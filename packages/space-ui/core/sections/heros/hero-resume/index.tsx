@@ -148,13 +148,19 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
               }).toString()}
             />
             <ResumeColumns>
-              <ResumeColumn content={firstColumn} css={{ pr: "7.5mm" }} />
+              <ResumeColumn
+                content={firstColumn}
+                css={{
+                  pr: "7.5mm",
+                  mb: "7.5mm",
+                  br: "solid $fontSecondary 1mm",
+                }}
+              />
               <ResumeColumn
                 content={secondColumn}
                 css={{
-                  bl: "solid $fontSecondary 1mm",
                   pl: "7.5mm",
-                  pb: "7.5mm",
+                  mb: "7.5mm",
                 }}
               />
               <ContactFooter />
