@@ -148,7 +148,7 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
               }).toString()}
             />
             <ResumeColumns>
-              <ResumeColumn content={firstColumn} />
+              <ResumeColumn content={firstColumn} css={{ pr: "7.5mm" }} />
               <ResumeColumn
                 content={secondColumn}
                 css={{
@@ -231,6 +231,6 @@ const ResumeContent = styled("div", {
 const ResumeColumns = styled("div", {
   flex: 1,
   display: "grid",
-  gridTemplateColumns: "2fr 3fr",
+  gridTemplateColumns: "repeat(2,auto)",
   g: "15mm",
 });
