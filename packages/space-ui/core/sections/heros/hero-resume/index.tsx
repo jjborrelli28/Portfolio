@@ -68,7 +68,11 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
         heightLeft -= pageHeight;
       }
 
-      pdf.save("resume.pdf");
+      pdf.save(
+        locale?.startsWith("es")
+          ? "JuanJoseBorrelli-CV"
+          : "JuanJoseBorrelli-Resume"
+      );
     }
   };
 
