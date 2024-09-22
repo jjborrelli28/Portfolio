@@ -100,9 +100,9 @@ const ContactItem = ({
 
 const ContactFooterContainer = styled("div", {
   gridColumn: "1 / -1",
-  p: "3.75mm",
+  p: "7.5mm",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
-
   backgroundColor: "$fontSecondary",
+  gap: "1.875mm",
 });
