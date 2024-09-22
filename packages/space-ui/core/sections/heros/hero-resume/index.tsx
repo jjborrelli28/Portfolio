@@ -134,14 +134,27 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
                   </p>
                 ),
               }}
+            />{" "}
+            <img
+              src={asset.fields.light.fields.file.url}
+              className={css({
+                position: "absolute",
+                top: "7.5mm",
+                right: "10mm ",
+                maxw: "42mm ",
+                borderRadius: "50%",
+                b: "solid $fontSecondary 1mm",
+                overflow: "hidden",
+              }).toString()}
             />
             <Asset
               asset={asset}
               className={css({
                 position: "absolute !important",
-                top: "7.5mm",
-                right: "10mm",
-                maxw: "42mm",
+                top: "7.5mm !important",
+                right: "10mm !important",
+                maxw: "42mm !important",
+                w: "42mm !important",
                 borderRadius: "50%",
                 b: "solid $fontSecondary 1mm",
                 overflow: "hidden",
