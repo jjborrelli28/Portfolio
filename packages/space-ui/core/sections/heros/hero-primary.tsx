@@ -92,7 +92,7 @@ const arrowStyles = (inView: boolean) => {
     bottom: "$4",
     left: "calc(50% - 30px)",
     transition: "color ease-in 0.3s",
-    zIndex: 10,
+    zIndex: 5,
     cursor: "default",
 
     "@bp2": {

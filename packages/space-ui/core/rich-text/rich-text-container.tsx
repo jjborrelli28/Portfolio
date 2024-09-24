@@ -5,4 +5,5 @@ export const RichTextContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  zIndex: "5",
 });

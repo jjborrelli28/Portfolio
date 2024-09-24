@@ -46,7 +46,6 @@ export const secondaryUnderlineAnimation = ({
       transitionDelay: "0.5s",
       transformOrigin: "bottom left",
       pointerEvents: "none",
-      zIndex: "-1",
     },
 
     "&:before": {

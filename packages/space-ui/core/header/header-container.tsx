@@ -55,7 +55,7 @@ const Header = styled("header", {
   top: "0",
   left: "0",
   right: "0",
-  zIndex: "999",
+  zIndex: "10",
   transition: "all 0.3s",
 
   variants: {

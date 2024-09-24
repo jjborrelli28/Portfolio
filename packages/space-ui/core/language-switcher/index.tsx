@@ -128,7 +128,7 @@ const DropdownMenu = styled("div", {
   transition: "grid-template-rows 0.3s, opacity 0.3s",
   borderTop: "$line 2px solid",
   boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-  zIndex: 10,
+  zIndex: 5,
 
   "@bp2": {
     right: "0",

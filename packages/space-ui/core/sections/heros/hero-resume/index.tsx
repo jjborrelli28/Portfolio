@@ -2,7 +2,6 @@ import { Document } from "@contentful/rich-text-types";
 import { fadeAnimation } from "@space-ui/animations";
 import { css, styled } from "@space-ui/config";
 import {
-  Asset,
   BackgroundColorBaseSectionProps,
   BaseSection,
   Button,
@@ -47,6 +46,8 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
+        width: element.offsetWidth,
+        height: element.scrollHeight,
       });
 
       const imgData = canvas.toDataURL("image/png");
@@ -58,7 +59,16 @@ export const HeroResume = ({ section }: HeroResumeProps) => {
 
       let position = 0;
 
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        position,
+        imgWidth,
+        imgHeight,
+        undefined,
+        "SLOW"
+      );
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
@@ -222,12 +232,13 @@ const ResumeContainer = styled("div", {
 });
 
 const Resume = styled("div", {
-  h: "297mm",
+  h: "295mm",
   w: "210mm",
   backgroundColor: "#fff",
   display: "flex",
   p: "7.5mm",
   filter: "drop-shadow(0 20px 20px rgba(81, 29, 37, .5))",
+  zIndex: 10,
 });
 
 const ResumeContent = styled("div", {
