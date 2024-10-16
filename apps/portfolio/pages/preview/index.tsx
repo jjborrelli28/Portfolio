@@ -4,4 +4,5 @@ import { getPageProps } from "page/props/get-page-props";
 
 export default Page;
 
-export const getStaticProps: GetStaticProps = getPageProps;
+export const getStaticProps: GetStaticProps = (context) =>
+  getPageProps(context, true);
