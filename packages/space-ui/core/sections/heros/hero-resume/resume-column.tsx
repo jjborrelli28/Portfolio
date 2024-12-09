@@ -1,5 +1,5 @@
 import { Document } from "@contentful/rich-text-types";
-import { css as styles, styled } from "@space-ui/config";
+import { styled, css as styles } from "@space-ui/config";
 import { EntryInlineContainer } from "@space-ui/core/card/card";
 import { Paragraph } from "@space-ui/core/rich-text/html-components";
 import { RichText } from "@space-ui/core/rich-text/rich-text";
@@ -131,7 +131,7 @@ export const ResumeColumn = ({
                           {!firstChildIsText && (
                             <img
                               src={
-                                entry.data.target.fields.light.fields.file.url
+                                entry.data.target.fields.light.fields.file?.url
                               }
                               className={styles({
                                 my: "0.9375mm",
@@ -162,7 +162,7 @@ export const ResumeColumn = ({
                           {firstChildIsText && (
                             <img
                               src={
-                                entry.data.target.fields.light.fields.file.url
+                                entry.data.target.fields.light.fields.file?.url
                               }
                               className={styles({
                                 my: "0.9375mm",

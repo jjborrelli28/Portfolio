@@ -14,15 +14,15 @@ import {
   useHeaderContext,
 } from "@space-ui/core";
 import type * as Stitches from "@stitches/react";
-import { LanguageSwitcher } from "../language-switcher";
 import { Link as ScrollLink } from "react-scroll";
+import { LanguageSwitcher } from "../language-switcher";
 
 export const Header = ({ header, className, css }: HeaderProps) => {
+  const { status, setStatus } = useHeaderContext();
+
   if (!header) return null;
 
   const { size = "lg", logo, navigation, languageFlags } = header.fields;
-
-  const { status, setStatus } = useHeaderContext();
 
   const toggleStatus = () =>
     setStatus((previous: InitialStateProps) =>
@@ -52,7 +52,7 @@ export const Header = ({ header, className, css }: HeaderProps) => {
               position: "absolute !important",
               top: "$5",
               right: "$5",
-              cursor: "default",
+              cursor: "pointer",
 
               "@bp2": {
                 position: "relative !important",

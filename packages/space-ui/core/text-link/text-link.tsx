@@ -1,5 +1,3 @@
-import { css } from "@space-ui/config";
-import clsx from "clsx";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 
@@ -12,10 +10,7 @@ export const TextLink = ({
 }: PropsWithChildren<TextLinkProps>) => {
   return (
     <Link href={href} target={target} data-href={href}>
-      <a
-        className={clsx(css({ cursor: "default" }).toString(), className)}
-        aria-label={ariaLabel}
-      >
+      <a className={className} aria-label={ariaLabel}>
         {children}
       </a>
     </Link>

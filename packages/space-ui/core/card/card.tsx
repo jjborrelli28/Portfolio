@@ -41,10 +41,7 @@ export const CardLink = ({
 }: PropsWithChildren<CardLinkProps>) => {
   return (
     <Link href={href} target={target}>
-      <a
-        aria-label={ariaLabel}
-        className={clsx(css({ cursor: "default" }).toString(), className)}
-      >
+      <a aria-label={ariaLabel} className={className}>
         {children}
       </a>
     </Link>
